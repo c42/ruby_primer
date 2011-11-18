@@ -1,0 +1,128 @@
+.section :empty_arrays, "Empty arrays", 41
+  %p
+    Let's create an empty array. It's easy. Just do `[]`.
+
+   !enchant 43
+      short_name :build_empty_array
+      exercise!
+      starting_code <<-DATA
+               []
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "is truthful" do
+           user_code.should == []
+         end
+      DATA
+
+   !release
+
+  %p
+    See the result? It's pretty obvious that's an empty array. Well, `[]` is actually a shortform of `Array.new` which is rarely used. Try it
+
+
+   !enchant 45
+      short_name :build_new
+      exercise!
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "is truthful" do
+           user_code.should == Array.new
+         end
+      DATA
+
+   !release
+
+  %p
+    As you can see - identical results.
+    
+
+.section :growing, "Growing arrays", 47
+  In Ruby, any object of any type can be added to an array, not just numbers. How about appending the word 'woot' to an array? Try using `<<` - that's the 'append' function - to add it to the array below.
+
+
+   !enchant 49
+      short_name :append
+      exercise!
+      starting_code <<-DATA
+              "[1, 2, 3, 4, 5]"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "is truthful" do
+           user_code.should == [1,2,3,4,5,'woot']
+         end
+      DATA
+
+   !release
+
+
+.section :transforming, "Transforming arrays", 51
+  Now on to more interesting things, but with a little tip from me first. Try running this:
+
+
+   !enchant 53
+      short_name :map
+      exercise!
+      starting_code <<-DATA
+             "[1, 2, 3, 4, 5].map { |i| i + 1 }"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "is truthful" do
+           user_code.should == true
+         end
+      DATA
+
+   !release
+
+  You'll notice that the output, `[2, 3, 4, 5, 6]` is the result of applying the code inside the curly brace to every single element in the array. The result is an entirely new array containing the results.
+
+  In Ruby, the method `map` is used to transform the contents an array according to a specified set of rules defined in code.
+
+  Go on, you try it. Multiply every element in the array below by 3 to get `[3, 6, 9]`.
+
+
+   !enchant 55
+      short_name :multiply_everything
+      exercise!
+      starting_code <<-DATA
+              "[1, 2, 3, 4, 5].map { |i| i + 1 }"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "is truthful" do
+           user_code.should == true
+         end
+      DATA
+
+   !release

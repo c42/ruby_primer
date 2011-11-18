@@ -1,0 +1,37 @@
+.section :find_string_length, "Find length of strings in a given array", 59
+  %p
+    Given an array containing some strings, return another array with their lengths, in the same order as they are. 
+  %p  
+    You are supposed to write a method named 'length_finder', which accepts an array and returns another array as described before.
+  %p
+    <strong>Example:</strong><br/>
+    Given ['Ruby','Rails','C42'] the method should return [4,5,3]
+    
+
+   !enchant 67
+      short_name :length_finder
+      exercise!
+      starting_code <<-DATA
+               def length_finder(input_array)
+               end
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+      solution <<-DATA
+         Foo Bad
+      DATA
+
+      specs <<-DATA
+         it "is truthful" do
+           length_finder(['foo','bar','ma']).should eq([3,3,2])
+         end
+      DATA
+
+      hint <<-DATA
+         Bad Goo
+      DATA
+
+   !release
