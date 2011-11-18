@@ -1,3 +1,5 @@
+title - Foo
+
 .section :find_string_length, "Find length of strings in a given array", 59
   %p
     Given an array containing some strings, return another array with their lengths, in the same order as they are. 

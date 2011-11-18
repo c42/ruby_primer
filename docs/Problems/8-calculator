@@ -1,3 +1,5 @@
+title - Calculator
+
 .section :split, "Splitting Strings", 58
   %p
     Splitting strings is one of the most common operation you will need to perform on String objects. Just like String#length, the method for split is String#split. If you split the String on space ' ', you can get an array of words within the given String. Let's try that:
