@@ -26,7 +26,7 @@ title - Some basic
    !release
 
   %p
-    See the result? It's pretty obvious that's an empty array. Well, `[]` is actually a shortform of `Array.new` which is rarely used. Try it
+    See the result? It is pretty obvious that's an empty array. Well, `[]` is actually a shortform of `Array.new` which is rarely used. Try it
 
 
    !enchant 45

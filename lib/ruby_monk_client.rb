@@ -1,15 +1,15 @@
 require 'wrest'
 require 'json'
+require 'uuid'
 
 class RubyMonkClient
-
   def initialize
-    @token_url = "http://localhost:3000/sandbox/token/create"
     @post_url = "http://localhost:3000/sandbox/import/create"
+    @auth_token = UUID.new
   end
 
-  def authenticate
-    @token_url.to_uri.post.deserialise
+  def generate_token
+    { "sandbox_token" => @auth_token.generate }
   end
 
   def sync_data(chapters_hash)
