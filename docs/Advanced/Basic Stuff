@@ -2,7 +2,7 @@ title - Some basic
 
 .section :empty_arrays, "Empty arrays", 41
   %p
-    Let's create an empty array. It's easy. Just do `[]`.
+    Let's create an empty array. It is easy. Just do `[]`.
 
    !enchant 43
       short_name :build_empty_array
