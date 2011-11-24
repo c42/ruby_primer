@@ -1,1 +1,13 @@
+db/schema.rb
+.rvmrc
+log/*.*
 .idea
+coverage
+tmp
+.DS_Store
+.bundle/
+config/database.yml
+config/application.yml
+bin/
+public/system/
+
