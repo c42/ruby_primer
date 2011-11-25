@@ -8,6 +8,5 @@ tmp
 .bundle/
 config/database.yml
 config/application.yml
-bin/
 public/system/
 
