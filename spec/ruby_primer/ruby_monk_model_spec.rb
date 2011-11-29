@@ -9,6 +9,7 @@ describe RubyMonkModel do
       @model = RubyMonkModel.new(@fixtures_root)
       @content = @model.build_hash
       @chapters = @content["chapters"]
+
     end
 
     it "reads the chapters" do
@@ -22,13 +23,18 @@ describe RubyMonkModel do
 
     it "discards the title from the raw content" do
       lessons = @chapters.first["lessons"]
-      raw_content = lessons.first["raw_content"]
-      raw_content.should include File.read("#{@fixtures_root}/sample_chapter/sample_lesson.haml")
+      lessons.first["raw_content"].should_not include "title - "
     end
 
     it "reads the content of the lesson haml" do
+      sample_content = <<-DATA
+.section :sample_lesson, "This is a sample lesson", 41
+  %p
+    Sample lesson
+DATA
+.chop
       lessons = @chapters.first["lessons"]
-      lessons.first["raw_content"].should include File.read("#{@fixtures_root}/sample_chapter/sample_lesson.haml")
+      lessons.first["raw_content"].should eq(sample_content)
     end
   end
 end
