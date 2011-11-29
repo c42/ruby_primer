@@ -1,0 +1,56 @@
+title - Select random elements from an array
+
+.section :select_random_elements_from_array, "Select random elements from an Array", 128
+  %p
+    Create a method 'random_select' which given an array of elements (array) and a number (n), 
+    returns n randomly selected elements from the array.
+    
+  %p
+    <strong>Example:</strong>
+    Given an array [1,2,3,4,5] and 2 should return random two numbers randomly selected from this array. 
+    The method should return the selected values in a new array.
+  %p
+	  Calling the method twice should ideally return different sets of values.
+	
+
+   !enchant 1188
+      short_name :select_random_elements
+      exercise!
+      starting_code <<-DATA
+             def random_select(array, n)
+               # your code here
+         	  end
+             
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+      solution <<-DATA
+         def random_select(array, n)
+           result = []
+           n.times do 
+             result << array[rand(array.length)]
+           end
+           result
+         end
+      DATA
+
+      specs <<-DATA
+         it "Returns the exact number of elements as asked" do
+           a = random_select([1,2,3,4],2)
+           puts "passing #{[1,2,3,4]} and 2 returned #{a}"
+           a.should have(2).numbers
+         end
+         
+         it "Does not return the same input on two consecutive calls" do
+           array = [3,1,5,7,9,3]
+           a = random_select(array,2)
+           b = random_select(array,2)
+           puts "passing #{array} and 2 twice returned #{a} and #{b}"
+           a.should_not eq(b)
+         end
+      DATA
+
+   !release

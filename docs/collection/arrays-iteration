@@ -1,0 +1,171 @@
+title - Iteration
+
+.section :arrays_for_loops, "for loops?", 50
+  %p
+    Ruby, like most languages, has the all-time favourite <code>for</code> loop. Interestingly, nobody uses it much - but let's leave the
+    alternatives for the next exercise.
+    Here's how you use a for loop in Ruby. Just run the code below to print all the values in the array.
+
+   !enchant 52
+      short_name :print_contents_of_array
+      example!
+      starting_code <<-DATA
+               array = [1, 2, 3, 4, 5]
+               for i in array
+                 puts i
+               end
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         user_code
+      DATA
+
+   !release
+
+    Ok, your turn now. Copy the values less than 4 in the array stored in the <code>source</code> variable
+    into the array in the <code>destination</code> variable.
+
+   !enchant 57
+      short_name :copy_array_to_array_using_for_loop
+      exercise!
+      starting_code <<-DATA
+               def array_copy(destination)
+                 source = [1, 2, 3, 4, 5]
+                 # your code
+                 destination
+               end
+               
+               
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+         
+      DATA
+
+      solution <<-DATA
+         def array_copy(destination)
+           source = [1, 2, 3, 4, 5]
+           for i in source 
+             destination.push(i) if i < 4
+           end
+           destination
+         end
+      DATA
+
+      specs <<-DATA
+         it "copies only those elements which are less than 4" do
+           destination = []
+           destination = array_copy(destination)
+           puts destination.inspect
+           destination.should eq [1,2,3]
+         end
+      DATA
+
+      hint <<-DATA
+         
+         <p>You've already learned how to add elements to an array using the <code><<</code> and <code>Array#push</code> method.</p>
+         
+         <p>
+         But we haven't covered how to use conditions in Ruby yet. However the syntax is very simple:
+         
+         <pre>
+           # Assume 'answer' is a variable with an integer value
+           print "This is the ultimate answer" if answer == 42
+         </pre>
+         
+         </p>
+      DATA
+
+   !release
+ 
+
+.section :arrays_each, "looping with <code>each</code>", 65
+  %p
+    Iteration is one of the most commonly cited examples of the usage of _blocks_ in Ruby. 
+    The <code>Array#each</code> method accepts a block to which each element of the array is passed in turn.
+    You will find that <code>for</code> loops are hardly ever used in Ruby, and <code>Array#each</code> 
+    and its siblings are the de-facto standard.
+    We'll go into the relative merits of using <code>each</code> 
+    over for loops a little later once you've had some time to get familiar with it.
+    
+    Let's look at an example that prints all the values in an array.
+
+   !enchant 76
+      short_name :print_contents_of_array
+      example!
+      starting_code <<-DATA
+               array = [1, 2, 3, 4, 5]
+               array.each do |i|
+                 puts i
+               end
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         user_code
+      DATA
+
+   !release
+
+    Ok, now let's try the same thing we did with the <code>for</code> loop earlier - 
+    copy the values less than 4 in the array stored in the <code>source</code> variable to the array in the 
+    <code>destination</code> variable.
+
+   !enchant 78
+      short_name :copy_array_to_array_using_each
+      exercise!
+      starting_code <<-DATA
+               def array_copy(destination)
+                 source = [1, 2, 3, 4, 5]
+                 # your code
+                 destination
+               end
+               
+               
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+      solution <<-DATA
+         def array_copy(destination) 
+           source = [1, 2, 3, 4, 5] 
+           source.select {|i| i < 4 }.each do |i| 
+             destination.push(i)
+           end
+           destination 
+         end
+      DATA
+
+      specs <<-DATA
+         it "copy the elements of source into destination using each" do
+           destination = array_copy([])
+           puts destination.inspect
+           destination.should == [1,2,3]
+         end
+      DATA
+
+      hint <<-DATA
+         <p>
+         How do you select the elements that are less than 4? There are two ways: remember we've learned about filtering values using <code>select</code> in the last lesson. 
+         </p>
+         
+         <p>
+         You can add elements to an array by using the <code><<</code> operator, or by calling the <code>push</code> method.
+         </p>
+      DATA
+
+   !release

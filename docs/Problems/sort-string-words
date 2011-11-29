@@ -1,0 +1,39 @@
+title - Sort the words in a given sentence
+
+.section :sort_words_in_a_sentence, "Sort the words in a sentence", 127
+  %p
+    Create a method named 'sort_string' which accepts a String and rearranges all the words in it in the ascending order of their length. 
+    Let's not treat the punctuation marks any different than other characters and assume that we will always have single space to separate the words.
+
+  %p
+    <strong>Example:</strong> Given a string "Sort words in a sentence", it should return "a in Sort words sentence".
+
+
+   !enchant 1186
+      short_name :sort_words_in_a_sentence
+      exercise!
+      starting_code <<-DATA
+           def sort_string(string)
+         	  # your code here
+         	end
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+      solution <<-DATA
+         def sort_string(string)
+           string.split(' ').sort{|x, y| x.length <=> y.length}.join(' ')
+         end
+      DATA
+
+      specs <<-DATA
+         it "Given 'Awesome I am' it returns 'I am Awesome'" do
+           string = sort_string('Awesome I am')
+           puts string
+           string.should eq('I am Awesome')
+         end
+      DATA
+
+   !release

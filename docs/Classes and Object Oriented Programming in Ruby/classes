@@ -1,0 +1,101 @@
+title - Classes
+
+.section :grouping_objects, "Grouping Objects", 154
+  %p
+    At this point, one may wonder if all objects are the same. Are the
+    groupings we've already covered - numbers, strings, arrays - supported
+    by the Ruby language?
+  %p  
+    Ruby does in fact allow one to define groups of objects, or, to use
+    object oriented jargon, <em>classes</em> of objects.
+  %p  
+    One may look up the class of any object by simply calling the
+    <code>class</code> method on it. Let's try it out with a few of the
+    objects we're already familiar with.
+  
+    !enchant 3024
+      example!
+      short_name :common_object_classes_example
+      starting_code <<-DATA
+        puts 1.class
+        puts "".class
+        puts [].class
+      DATA
+      code_wrapper <<-DATA
+        def user_code
+          <%= user_code %>
+        end
+        user_code
+      DATA
+    !release
+  
+    %p
+      As you can see, Ruby tells us what we already suspected - that
+      <code>1</code> is a <code>Fixnum</code> (a special case of Integer),
+      <code>""</code> is a <code>String</code>
+      and <code>[]</code> is an <code>Array</code>.
+
+.section :classes_are_people, "Classes are people too", 155
+  %p
+    An important feature of classes in Ruby is that they too adhere to the
+    "everything is an object philosophy." This may be of interest to those
+    already familiar with Java, C++ and other similar languages where
+    classes are special constructs that cannot be interacted with like
+    normal objects.
+  %p  
+    So, in Ruby, classes themselves are simply objects that belong the
+    class <code>Class</code>. Here's a simple example that demonstrates
+    this fact:
+    
+  !enchant 3027
+    example!
+    short_name :class_class_example
+    starting_code <<-DATA
+      1.class.class
+    DATA
+    code_wrapper <<-DATA
+      def user_code
+        <%= user_code %>
+      end
+      puts user_code
+    DATA
+  !release
+
+.section :what_do_classes_do, "What do classes do?", 159
+  %p
+    The next logical question is, of course, do classes simply act as
+    logical groupings, or do they actually do something?
+  %p  
+    In Ruby, like other class-based object oriented languages that you may
+    already be familiar with, classes act as the factories that build
+    objects. An object built by a certain class is called 'an instance of
+    that class.' Typically, calling the <code>new</code> method on a class
+    results in an instance being created.
+  %p  
+    Let's build an instance of the most basic kind of object by calling
+    the method <code>new</code> on the object <code>Object</code>.
+    
+    !enchant 3028
+      exercise!
+      short_name :object_creation
+      starting_code ""
+      solution "Object.new"
+      code_wrapper <<-DATA
+        def user_code
+          <%= user_code %>
+        end
+      DATA
+      specs <<-DATA
+        it "an instance of Object is created" do
+          user_code.class.should eq Object
+        end
+      DATA
+    !release
+    
+    This object - or instance, to be more precise - can't do very much.
+    However, instances of more powerful classes like Arrays and Strings
+    can do a whole lot more as we'll see in other lessons. You will also
+    learn to create your own classes which you can then use to build
+    bigger and more powerful programs.
+    
+    
