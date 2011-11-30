@@ -28,11 +28,15 @@ end
 
 def republish
   content_hash = RubyMonkModel.new(DOCS).build_hash.merge({ "sandbox_token" => TOKEN })
-  response = CLIENT.sync_data(content_hash)
-  if response.ok?
-    puts "Success."
-  else
-    puts "Changes not uploaded. Server return an error"
+  begin
+    response = CLIENT.sync_data(content_hash)
+    if response.ok?
+      puts "Success."
+    else
+      puts "Changes not uploaded. Server returned an error."
+    end
+  rescue Errno::ECONNREFUSED
+    puts "Could not connect to network."
   end
 end
 
