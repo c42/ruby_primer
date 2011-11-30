@@ -13,7 +13,7 @@ describe RubyMonkModel do
     end
 
     it "reads the chapters" do
-      @chapters.first["short_name"].should eq "sample_chapter"
+      @chapters.first["short_name"].should eq "01-sample_chapter"
     end
 
     it "reads the lessons of the chapters" do
