@@ -9,7 +9,7 @@ class RubyMonkModel
   def build_hash
     {
       "chapters" =>
-        @chapter_directories.map do |chapter_directory_name|
+        @chapter_directories.sort.map do |chapter_directory_name|
           {
             "short_name" => chapter_directory_name.to_s,
             "lessons" => lessons(chapter_directory_name)
@@ -21,7 +21,7 @@ class RubyMonkModel
   private
   def lessons(chapter_directory_name)
     Pathname.glob("#{@base_path}/#{chapter_directory_name}/*").map do |lesson_filename|
-       parse_lesson(lesson_filename)
+      parse_lesson(lesson_filename)
     end
   end
 
@@ -29,8 +29,8 @@ class RubyMonkModel
   def parse_lesson(lesson_filename)
     content = File.read(lesson_filename.to_s).split("\n")
 
-    title = content.shift.gsub('title - ', '') if content.first.include? 'title -'
-    title ||= lesson_filename.to_s.titlecase
+    title = (content.shift.gsub('title - ', '') if content.first.include? 'title -') unless content.empty?
+    title ||= lesson_filename.basename.to_s.titlecase
 
     {
       "short_name" => lesson_filename.basename.sub_ext("").to_s,
