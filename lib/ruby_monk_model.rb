@@ -9,12 +9,12 @@ class RubyMonkModel
   def build_hash
     {
       "chapters" =>
-        @chapter_directories.sort.map do |chapter_directory_name|
-          {
-            "short_name" => chapter_directory_name.to_s,
-            "lessons" => lessons(chapter_directory_name)
-          }
-        end
+      @chapter_directories.sort.map do |chapter_directory_name|
+        {
+          "short_name" => chapter_directory_name.to_s,
+          "lessons" => lessons(chapter_directory_name)
+        }
+      end
     }
   end
 
