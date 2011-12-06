@@ -1,9 +1,13 @@
 source "http://rubygems.org"
 
-gem 'wrest'
 gem 'rake'
 gem 'rspec'
-gem 'fssm', '~> 0.2.7'
+
 gem 'rb-fsevent'
-gem 'i18n'
+gem 'rb-inotify'
+
+gem 'fssm', '~> 0.2.7'
+gem 'wrest'
+
 gem 'uuid'
+gem 'i18n'
