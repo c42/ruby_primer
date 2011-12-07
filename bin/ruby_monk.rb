@@ -32,6 +32,9 @@ def republish
     response = CLIENT.sync_data(content_hash)
     if response.ok?
       puts "Success."
+    elsif response.bad_request?
+      puts "Changes not uploaded. Server returned error:"
+      puts response.body
     else
       puts "Changes not uploaded. Server returned an error."
     end
