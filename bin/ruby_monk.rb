@@ -16,7 +16,7 @@ SANDBOX_URL = "http://localhost:3000/sandbox"
 CLIENT = RubyMonkClient.new(SANDBOX_URL+"/import/create", TOKEN)
 UPDATE_FREQUENCY_SECONDS = 5
 
-puts "Visit #{SANDBOX_URL}/?token=#{TOKEN} to see the content.\n\n"
+puts "Visit #{SANDBOX_URL}/?sandbox_token=#{TOKEN} to see the content.\n\n"
 
 def monitor
   FSSM.monitor(DOCS, '**/*', :directories => true) do
