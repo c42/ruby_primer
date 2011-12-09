@@ -1,0 +1,137 @@
+title - Introduction to Strings
+
+.section :string_construction, "String construction", 114
+  %p
+    In doing lies the true path, so let us begin by doing. Type out <code>"Ruby Monk"</code> in the box below 
+    (remember to include the quotes). 
+  
+  %p  
+    Now click on 'Run', or better yet, hit <code>Ctrl+Enter</code> or <code>Cmd+Enter</code>.
+    
+
+   !enchant 2111
+      short_name :string_first_sample
+      exercise!
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "Was that a String?" do
+           user_code.should be_a(String)
+           puts "Congratulations! You've just created your first Ruby String."
+         end
+      DATA
+
+   !release
+  
+  %p
+    Strings are key to communicating with a user and programming apprentices will encounter and start manipulating
+    strings from the earliest stages of their journey. In this lesson, we will explore some of the tools Ruby 
+    provides to create and manipulate strings.
+
+
+.section :string_literal_form, "Literal forms", 139
+  %p
+    String construction has what is known as a literal form - the interpreter treats anything surrounded with single quotes (<code>'</code>) or double quotes(<code>"</code>)
+    as a string. In other words, both <code>'RubyMonk'</code> and <code>"RubyMonk"</code> will create instances of strings.
+  %p
+    It's your turn now; go ahead and create a string that contains the name of the current month.
+    Like, 'April', or 'December'.
+
+
+   !enchant 588
+      short_name :string_month_intro
+      exercise!
+      starting_code <<-DATA
+             ''
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "matches the current month" do
+           user_code.should eq(Time.now.strftime('%B'))
+         end
+      DATA
+
+   !release
+  
+  %p
+    Action etches deeper into the memory than mere words. Recreate the string in the exercise above using double quotes (<code>"</code>).
+    You'll should see that the tests pass the same way as they did before.
+  
+
+   !enchant 1982
+      short_name :string_month_intro_double_quotes
+      exercise!
+      starting_code <<-DATA
+             ""
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "matches the current month" do
+           user_code.should eq(Time.now.strftime('%B'))
+         end
+      DATA
+
+   !release
+    
+  %p
+    The single quoted and double quoted approaches have some differences, which we will look into later. For
+    most purposes they are equivalent.
+  %p
+    All <code>Strings</code> are instances of the Ruby <code>String</code> class which provides a number of methods to manipulate the string. 
+    Now that you have successfully mastered creating strings let's take a look at some of the most commonly used methods.
+    
+
+.section :string_length, "String Length", 115
+  %p
+    As a programmer, one of the common things you need to know about a <code>String</code> is it's length.
+    Instead of merely telling you how to do this, let me share a secret about the Ruby API with you: <span class='italic'>Try the obvious!</span>
+    The Ruby core libraries are very intuitive, and with a little practice you can effortlessly convert instructions 
+    in plain English to Ruby. 
+  %p    
+    Test your intuition and try change the code below to return the length of the string <code>'RubyMonk'</code>.
+
+
+   !enchant 608
+      short_name :string_length
+      exercise!
+      starting_code <<-DATA
+             'RubyMonk'
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "calculates the length to be 8" do
+           puts user_code
+           user_code.should eq('RubyMonk'.length)
+         end
+      DATA
+
+      hint <<-DATA
+         'RubyMonk'.length
+      DATA
+
+   !release
+
+  %p
+    That shouldn't have taxed you intuition too much! Let's move on to a slightly more complex concepts.

@@ -1,0 +1,321 @@
+title - Functional Programming in Ruby - Lambdas and Blocks
+
+.section :lambdas, "Lambdas", 161
+  %p
+    You may have heard of lambdas before. Perhaps you've used them in 
+    other languages. Despite the fancy name, a lambda is just a function... 
+    peculiarly... without a name. They're <i>anonymous</i>, little 
+    functional spies sneaking into the rest of your code. Lambdas in Ruby are also objects, 
+    just like everything else! The last expression of a lambda is its return 
+    value, just like regular functions. As boring and familiar as that all 
+    sounds, it gives us a lot of power.
+    
+  %p
+    As objects, lambdas have methods and can be assigned to variables. Let's
+    try it!
+    
+    !enchant 3180
+      short_name :call_basic_lambda
+      example!
+      starting_code <<-DATA
+        l = lambda { "Do or do not" }
+        l.call
+      DATA
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+      specs <<-DATA
+         puts user_code
+      DATA
+    !release
+    
+  %p
+    Cool. Notice that our anticipatorily apologetic string is the return 
+    value of the lambda -- we didn't use <code>puts</code>. Now, while this is 
+    a lovely string, perhaps we'd like to return something more interesting. 
+    Lambdas take parameters in the same way blocks do: surrounding them with pipes.
+    (We first learned about blocks when we looked at collections. We'll come back 
+    to them in a minute.)
+
+    !enchant 3181
+      short_name :call_parameterized_lambda
+      example!
+      starting_code <<-DATA
+        l = lambda do |s|
+          return "There's no such thing" if s == "try"
+          "Do or do not."
+        end
+        l.call("try")
+      DATA
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+      specs <<-DATA
+         puts user_code
+      DATA
+    !release
+    
+  %p
+    Even cooler. Now go ahead and add a lambda to the following code, which will combine two names passed as
+    arguments, and return the combined name:
+    
+    !enchant 3182
+      short_name :combiner_lambda
+      exercise!
+      starting_code <<-DATA
+        def with_names(fn)
+          result = []
+          [ ["Christopher", "Alexander"],
+            ["John", "McCarthy"],
+            ["Joshua", "Norton"] ].each do |pair|
+              result << fn.call(pair[0], pair[1])
+          end
+          result
+        end
+        l = # Write the lambda here. 
+        with_names(l)
+      DATA
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+      specs <<-DATA
+         it "causes with_names to return an array of combined names" do
+           puts user_code.inspect
+           user_code.should eq(["Christopher Alexander", "John McCarthy", "Joshua Norton"])
+         end
+      DATA
+      hint <<-DATA
+         Lambda parameters are separated with a comma:
+         <code>lambda {|a,b| ... }</code>
+      DATA
+      solution <<-DATA
+def with_names(fn)
+  result = []
+  [ ["Christopher", "Alexander"],
+    ["John", "McCarthy"],
+    ["Joshua", "Norton"] ].each do |pair|
+      result << fn.call(pair[0], pair[1])
+  end
+  result
+end
+l = lambda { |first_name, last_name| "#{first_name} #{last_name}" }
+with_names(l)
+      DATA
+    !release
+
+.section :lambdas_vs_blocks, "Lambdas vs. Blocks", 162
+
+  %p
+    Something about that last example felt weird, didn't it? Perhaps not exclusively its 
+    contrived nature, either. It was a little verbose. A little repetetive. How many times
+    have we each written code of that nature? "Initialize some empty collection. Walk
+    over another collection, doing something to each element and stuffing those changed
+    elements into our new collection." What if we could write a function with that 
+    structure we could use over and over?
+    
+  %p
+    Okay, kid. I know you're excited. But before we get there, let's look at one more 
+    thing from that last example. Did you notice how <code>each</code> takes a block 
+    (<code>do ... end</code>)
+    much in the same way we're passing lambdas around? Blocks aren't just for 
+    built-in functions. We can use them, too. You can call a nameless block using 
+    the <code>yield</code> keyword. Let's try adding our powerful new method 
+    straight into <code>Array</code>. The <code>names</code> method should return 
+    our result.
+    
+  %div{:style => 'background-color: #E5E5E5;border-color: #777;display: -moz-inline-box;-moz-box-orient: vertical;display: inline-block;vertical-align: middle;padding: 3px 5px;-moz-border-radius: 4px;-webkit-border-radius: 4px;-o-border-radius: 4px;-ms-border-radius: 4px;-khtml-border-radius: 4px;border-radius: 4px;border-style: solid;border-width: 1px;'}
+    %p
+      Feeling lost? Let's go over that one more time. Ruby blocks are just lambdas. 
+      Lambdas are just functions. Blocks get that special <code>do ... end </code> 
+      syntax which makes them look oh-so-cute as iterators or chunks of code 
+      which perform atomic operations; a <code>with_transaction</code> method on 
+      a database object would probably accept a block. Now that we bring it up, <i>all</i>
+      methods accept blocks -- they're just not obligated to do anything with those 
+      blocks. An example might help: <code>puts {|a| a.bogus}</code> is completely 
+      legitimate, even though it doesn't make any sense. <code>puts</code> 
+      doesn't take a block (normally) but it's happy to ignore any block it gets. 
+      Any Ruby method will do this if it doesn't call <code>yield</code>. 
+      In that example, <code>a.bogus</code> isn't evaluated because it's the body 
+      of a function (block) that is never called. 
+    %p
+      If you've used a language like Java, JavaScript or C#, you're familiar with a 
+      special parameter called <code>this</code> (or <code>self</code>). How does 
+      that sneaky little devil get into your methods? You don't pass him around. Like 
+      blocks, <code>this</code> is implicit. Every Ruby method can call our magical, 
+      invisible friend <code>self</code> -- <code>yield</code> is the same, though 
+      it will throw an exception if there was no block given.
+
+    !enchant 3187
+      short_name :transmogrify
+      exercise!
+      starting_code <<-DATA
+        class Array
+          def transmogrify # see? no 'fn' parameter. magic.
+            result = []
+            each do |pair|
+              # how do you think 'yield' will be used here?
+            end
+            result
+          end
+        end
+
+        def names
+          [["Christopher", "Alexander"],
+           ["John", "McCarthy"],
+           ["Joshua", "Norton"]].transmogrify do |pair|
+              # by passing the entire element, we give more control to the block
+          end
+        end
+      DATA
+      code_wrapper <<-DATA
+        <%= user_code %>
+        def result
+          names
+        end
+        def code_string
+          <%= user_code.inspect %>
+        end
+      DATA
+      specs <<-DATA
+        it "causes transmogrify to return an array of combined names" do
+          puts result.inspect
+          result.should eq(["Christopher Alexander", "John McCarthy", "Joshua Norton"])
+        end
+        it "does not include a call to 'map' or 'collect'" do
+          code_string.include?("map").should be_false
+          code_string.include?("collect").should be_false
+        end
+      DATA
+      hint <<-DATA
+         Try to think of <code>yield(pair)</code> as equivalent to 
+         <code>fn.call(pair)</code>
+      DATA
+    !release
+
+  %p
+    It almost seems like such a powerful generic construct would be a part of 
+    <code>Array</code> already, wouldn't it? Sure enough, you've just built the 
+    guts to a method called <code>map</code> (also known as <code>collect</code>). 
+    And, you'll be delighted to know, it's not limited to <code>Array</code>. It's 
+    available on all <code>Enumerable</code> collections in Ruby. 
+    You will use <code>map</code> many, <i>many</i> times in your Ruby code. Let's 
+    try it one more time before we move on to the last exercise.
+    
+  %p
+    For fun, try both forms of block syntax: <code>do |a| ... end</code> and 
+    <code>{ |a| ... }</code>. By convention, it's common to see the curly 
+    braces in one-liners and the do-end syntax for multi-line blocks.
+    
+  !enchant 3188
+      short_name :map
+      exercise!
+      starting_code <<-DATA
+        class Hero
+          def initialize(*names)
+            @names = names
+          end
+          def full_name
+            # a hero class allows us to easily combine an arbitrary number of names
+          end
+        end
+
+        def names
+          heroes = [Hero.new("Christopher", "Alexander"),
+                    Hero.new("John", "McCarthy"),
+                    Hero.new("Emperor", "Joshua", "Abraham", "Norton")]
+          # map over heroes using your new powers!
+        end
+      DATA
+      code_wrapper <<-DATA
+        <%= user_code %>
+        def result
+          names
+        end
+        def code_string
+          <%= user_code.inspect %>
+        end
+      DATA
+      specs <<-DATA
+        it "names returns an array of combined names" do
+          puts result.inspect
+          result.should eq(["Christopher Alexander", "John McCarthy", "Emperor Joshua Abraham Norton"])
+        end
+        it "does not include a call to 'map' or 'collect'" do
+          (code_string.include?("map") || code_string.include?("collect")).should be_true
+        end
+      DATA
+      hint <<-DATA
+         Arrays have a <code>join</code> method which might come in handy here.
+      DATA
+  !release
+  
+  %p
+    Okay, so we've got a firm grip on the reins of basic blocks. Let's have a look 
+    at one slightly more powerful method which consumes blocks: <code>inject</code>. 
+    You've probably heard of <a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>. 
+    If not, click that link. Ruby's <code>map</code> is the Map in MapReduce. 
+    Ruby's <code>inject</code> is the Reduce. They are magic sprinkles on fatty 
+    gelato when they're together, but let's look at <code>inject</code> on its own first.
+    
+  %p
+    Imagine our <code>full_name</code> method in the previous example was supposed to 
+    capitalize the first character of each part of the name as it combined them. We 
+    could <code>map</code> over the name-parts and then <code>join</code>... or we 
+    could use <code>inject</code>! Take a look at the example and then see if you can 
+    apply it yourself.
+    
+    !enchant 3189
+      short_name :inject_example
+      example!
+      starting_code <<-DATA
+        start_from = 10
+        [1, 3, 5, 7].inject(start_from) do |sum, n|
+          sum + n
+        end
+      DATA
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+      specs <<-DATA
+         puts user_code
+      DATA
+    !release
+    
+
+  !enchant 3190
+      short_name :inject_names
+      exercise!
+      starting_code <<-DATA
+        # bust out a beefy reduce on this bad boy:
+        ["emperor", "joshua", "abraham", "norton"]
+      DATA
+      code_wrapper <<-DATA
+        def result
+          <%= user_code %>
+        end
+        def code_string
+          <%= user_code.inspect %>
+        end
+      DATA
+      specs <<-DATA
+        it "returns a combined and capitalized name" do
+          puts result.inspect
+          result.should eq("Emperor Joshua Abraham Norton")
+        end
+        it "includes a call to 'inject'" do
+          code_string.include?("inject").should be_true
+        end
+      DATA
+      hint <<-DATA
+         There exists a <code>String#capitalize</code> method to make your life easier.
+      DATA
+  !release
+  

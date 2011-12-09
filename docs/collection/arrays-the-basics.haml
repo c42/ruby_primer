@@ -1,0 +1,226 @@
+title - Basic Array Operations
+
+.section :transforming_arrays, "Transforming arrays", 145
+  %p
+    Now on to more interesting things, but with a little tip from me first. Try running this:
+
+
+   !enchant 577
+      short_name :map
+      example!
+      starting_code <<-DATA
+             [1, 2, 3, 4, 5].map { |i| i + 1 }
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+      DATA
+
+   !release
+
+  %p
+    You'll notice that the output, <code>[2, 3, 4, 5, 6]</code> is the result of applying the code inside the curly brace to
+    every single element in the array. The result is an entirely new array containing the results.
+
+    In Ruby, the method <code>map</code> is used to transform the contents of an array according to a specified set of rules
+    defined inside the code block.
+
+    Go on, you try it. Multiply every element in the array below by 3 to get <code>[3, 6 .. 15]</code>.
+
+
+   !enchant 578
+      short_name :multiply_everything
+      exercise!
+      starting_code <<-DATA
+              [1, 2, 3, 4, 5]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         [1,2,3,4,5].map { |i| i * 3 }
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "creates an array [3,6,9,12,15] for an input array of [1,2,3,4,5]" do
+           user_code.should eq([3,6,9,12,15])
+         end
+      DATA
+
+   !release
+
+  %p
+    Ruby aliases the method <code>Array#map</code> to <code>Array#collect</code>; they can be used interchangeably.
+
+
+.section :filtering_arrays, "Filtering elements of an Array", 146
+  %p
+    Filtering elements in a collection according to a boolean expression is a very common operation in day-to-day programming. 
+    Ruby provides the rather handy <code>select</code> method to make this easy.
+    
+
+   !enchant 2303
+      short_name :filter_array_example
+      example!
+      starting_code <<-DATA
+               # select even numbers
+               [1,2,3,4,5,6].select {|number| number % 2 == 0}
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+      DATA
+
+   !release
+    
+    The method <code>select</code> is the standard Ruby idiom for filtering elements. 
+    In the following code, try extracting the strings that are longer than five characters.
+    
+
+   !enchant 2304
+      short_name :filter_array
+      exercise!
+      starting_code <<-DATA
+               names = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+               # your code here
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         names = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+         names.select {|word| word.length > 5}
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         
+         it "gives words that are longer than five characters" do
+           user_code.should == ['rock','paper', 'scissors', 'lizard', 'spock'].select {|word| word.length > 5}
+         end
+      DATA
+
+   !release
+
+
+.section :delete_elements, "Deleting elements", 144
+  %p
+    One of the reasons Ruby is so popular with developers is the intuitiveness of the API. 
+    Most of the time you can guess the method name which will perform the task you have in your mind. 
+    Try guessing the method you need to use to delete the element '5' from the array given below:
+
+
+   !enchant 370
+      short_name :delete
+      exercise!
+      starting_code <<-DATA
+               [1,3,5,4,6,7]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "deletes element 5 from the array" do
+           user_code.should eq(5)
+         end
+      DATA
+
+      hint <<-DATA
+         Say, "array <i>delete</i> 5"
+      DATA
+
+   !release
+
+  %p
+    I guess that was easy. What if you want to delete all the elements less than 4 from the given array. 
+    The example below does just that:
+
+
+   !enchant 371
+      short_name :delete_if
+      example!
+      starting_code <<-DATA
+               [1,2,3,4,5,6,7].delete_if{|i| i < 4 }
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+
+  %p
+    Hands-on time. Delete all the even numbers from the array given below.
+
+
+   !enchant 458
+      short_name :delete_if_even
+      exercise!
+      starting_code <<-DATA
+               [1,2,3,4,5,6,7,8,9]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "deletes all the even numbers" do
+           [2,4,6,8].each do |even|
+             user_code.should_not include(even)
+           end
+         end
+         
+         it "does not delete the odd numbers" do
+           [1,3,5,7,9].each do |odd|
+             user_code.should include(odd)
+           end
+         end
+      DATA
+
+      hint <<-DATA
+         If the number (n) is even then n%2 == 0
+      DATA
+
+   !release
+  
+  %p
+    <span class="tweetable" data-tweet="Ruby is so concise that deleting all the even elements from an array takes a single line of code.">Doing this in languages like C or Java would take you a lot of boiler plate code. 
+    The beauty of Ruby is in its concise but readable code.</span>
+
+    

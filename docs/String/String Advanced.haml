@@ -1,0 +1,255 @@
+title - Advanced String Operations
+
+.section :split, "Splitting Strings", 119
+  %p
+    In this lesson, we will have a look at some vital methods that the <code>String</code> object provides for string manipulation.
+  %p
+    Splitting strings on a particular word, escape character or white space to get an array of sub-strings, is an oft-used technique.
+    The method the Ruby <code>String</code> API provides for this is String#split. Let us begin by splitting the string below on space ' '
+    to get a collection of words in the string. 
+
+
+   !enchant 664
+      short_name :string_split_simple
+      exercise!
+      starting_code <<-DATA
+             'Fear is the path to the dark side'
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "splits the string on space" do
+           puts user_code.inspect
+           user_code.should eq('Fear is the path to the dark side'.split(' '))
+         end
+      DATA
+
+      hint <<-DATA
+         String#split(' ')
+      DATA
+
+   !release
+
+  %p
+    One can effectively manipulate strings by combining String#split and a Regular Expressions. 
+    We will take look at Regular expressions, their form and usage further down the lesson.
+  %p
+    It is possible to similarly split strings on new lines, and parse large amounts of data that is in the form of CSV.
+    
+
+.section :concat, "Concatenating Strings", 120
+  %p
+    You can create a new string by adding two strings together in Ruby, just like most other languages.
+
+
+   !enchant 669
+      short_name :string_addition
+      example!
+      starting_code <<-DATA
+             'Ruby' + 'Monk'
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+
+  %p
+    Ruby often provides more than one way to do the same thing. The literal and expressive method for String concatenation is String#concat. 
+
+
+   !enchant 670
+      short_name :string_concatination
+      example!
+      starting_code <<-DATA
+             "Ruby".concat("Monk")
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+      hint <<-DATA
+         "Ruby" << "Monk"
+      DATA
+
+   !release
+
+  %p
+    Let's try a more widely used alias. You can use '<<' just like '+', but in this case the String object 'Monk' will be concatenated to the 'Ruby' String itself.
+    Change the code above to use '<<' and see all the tests passing again.
+
+
+.section :replace, "Replacing a substring", 124
+  %p
+    The Ruby String API provides strong support for searching and replacing within strings. We can search for sub-strings or use Regex. 
+    Let us first try our hands at something simple. This is how we would replace 'I' with 'We' in a given string:
+
+
+   !enchant 803
+      short_name :string_sub_simple
+      example!
+      starting_code <<-DATA
+             "I should look into your problem when I get time".sub('I','We')
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+
+  %p
+    The above method only replaced the first occurrence of the searched for term. In order to replace all occurrences we can use a method called gsub with has a global scope.
+
+
+   !enchant 804
+      short_name :string_gsub_simple
+      example!
+      starting_code <<-DATA
+             "I should look into your problem when I get time".gsub('I','We')
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+
+  %p
+    If you haven't come across the term Regular Expression before, now is the time for introductions.
+    Regular Expressions or RegExs are a concise and flexible means for "matching" particular characters, words, or patterns of characters.
+    In Ruby you specify a RegEx by putting it between a pair of forward slashes (<code>/</code>).
+    
+    Now let's look at an example that replaces all the vowels with the number 1:
+
+   !enchant 805
+      short_name :string_sub_vowel
+      exercise!
+      starting_code <<-DATA
+             'RubyMonk'.gsub(/[aeiou]/,'1')
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+
+  %p
+    Could you replace all the characters in capital case with number '0' in the following problem?
+
+   !enchant 806
+      short_name :string_sub_capital
+      exercise!
+      starting_code <<-DATA
+             'RubyMonk Is Pretty Brilliant'
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         it "Converted all the capital letters to 0" do
+           puts user_code
+           user_code.should eq('RubyMonk Is Pretty Brilliant'.gsub(/[A-Z]/,'0'))
+         end
+      DATA
+
+      hint <<-DATA
+         The pattern to identify Capital letters is /[A-Z]/
+      DATA
+
+   !release
+
+
+.section :match, "Find a substring using RegEx", 125
+  %p
+    We had earlier covered the art of finding the position of a substring in a previous lesson, but how do we handle those cases where we don't know exactly what we are looking for?
+    That's where Regular Expressions come handy. The String#match method converts a pattern to a Regexp (if it isn‘t already one), and then invokes its match method on the target String object.
+    Here is how you find the characters from a String which are next to a whitespace:
+
+   !enchant 838
+      short_name :string_match_whitespace
+      example!
+      starting_code <<-DATA
+             'RubyMonk Is Pretty Brilliant'.match(/\s./)
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+  %p
+    As you can see in the output, the method just returns the first match rather than all the matches. In order to find further matches, we can pass a second argument to the match method. 
+    When the second parameter is present, it specifies the position in the string to begin the search. Let's find out the second character preceded by space:
+
+   !enchant 839
+      short_name :string_match_2
+      exercise!
+      starting_code <<-DATA
+             'RubyMonk Is Pretty Brilliant'.match(/\s./,9)
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code
+      DATA
+
+   !release
+  %p
+    All the complex use cases of this method though involves more advanced Regular Expressions, which are outside the context of this lesson.
+    However, on an ending note, if you ever choose to implement a parser, String#match might turn out to be a very good friend!
+     
+    
