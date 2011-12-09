@@ -1,0 +1,105 @@
+title - Syntactic Sugar for Special Methods
+
+.section :special_methods, "Special Methods", 151
+  %p
+    As an observant initiate, you've probably noticed that in the
+    last lesson, Integer objects list mathematical operators like
+    <code>+</code> and <code>-</code> among their methods.
+    
+    You probably also thought to yourself that invoking the <code>+</code> method 
+    like so - <code>1.+(2)</code> - to add two numbers would be... clumsy. 
+
+  %p  
+    It is, though it works just fine - try for yourself by adding <code>4</code> to <code>3</code> in
+    the exercise below.
+  
+    !enchant 2991
+      exercise!
+      short_name :addition_using_message_passing
+      starting_code <<-DATA
+        4
+      DATA
+      specs <<-DATA
+        it "should give result two" do
+          user_code.should eq(7)
+        end
+      DATA
+      code_wrapper <<-DATA
+        def user_code
+          <%= user_code %>
+        end
+      DATA
+    !release
+  
+  %p
+    Ruby as a language aims to be extremely programmer-friendly, so you
+    can usually safely assume that there is a better way. 
+    <span class="tweetable" data-tweet="In Ruby 1 + 2 is equal to saying 1.+(2). Providing consistency as well as programmer friendly API.">
+    Ruby makes an exception in its syntactic rules for commonly used operators so you
+    don't have to use periods to invoke them on objects.</span>
+    
+  %p  
+    Let us rephrase the previous example in a more natural syntax by omitting the periods and brackets. 
+    
+    !enchant 2992
+      example!
+      short_name :normal_addition_example
+      starting_code <<-DATA
+        1+2   # this is same as 1.+(2) 
+      DATA
+      code_wrapper <<-DATA
+        puts <%= user_code %>
+      DATA
+    !release
+  
+  %p
+    There are several other method names that have this special status -
+    here's a quick summary of the ones you're most likely to run into.
+  %p
+    %pre
+      +   -   *   /   =   ==    !=    >   <   >=    <=    []
+  %p
+    This last method (<code>[]</code>) you've probably already seen in the 
+    lesson that covers Arrays, and is arguably the most unique in its syntax.
+
+    Not only does it not require a period, it also <em>encloses</em> the
+    arguments to itself. Here's a quick example to refresh your memory:
+
+  !enchant 2993
+    example!
+    short_name :array_notation_example
+    starting_code <<-DATA
+      words = ["foo", "bar", "baz"]
+      words[1]
+    DATA
+    code_wrapper <<-DATA
+      def user_code
+        <%=user_code%>
+      end
+      puts user_code
+    DATA
+  !release
+
+  %p
+    Even more interesting is that it still works if you use the more
+    traditional method syntax - see for yourself by running the example
+    below.
+
+  !enchant 2994
+    example!
+    short_name :conventional_array_notation_example
+    starting_code <<-DATA
+      words = ["foo", "bar", "baz"]
+      words.[](1)
+    DATA
+    code_wrapper <<-DATA
+      def user_code
+        <%=user_code%>
+      end
+      puts user_code
+    DATA
+  !release
+        
+  %p
+  This is a common pattern in Ruby - two different ways to do the same thing where one remains consistent 
+  and the other changes the syntax to be more programmer friendly.

@@ -1,0 +1,190 @@
+title - Building your own class
+
+.section :custom_classes, "Getting classy", 156
+  
+  %p
+    Let us start by building a class of our very own. Of course, a class
+    needs a job or a role that its instances fulfill, or we have no reason
+    to create one. Let us start by creating a class that represents a
+    simple geometric Rectangle.
+  
+  %p
+    As you may have noticed already, classes in Ruby have names beginning
+    with a capital letter. This convention has other implications that we
+    shall go into later - for now, all our classes shall have names that
+    begin with a capital letter.
+  
+  !enchant 3032
+    example!
+    short_name :custom_classes_first_example
+    starting_code <<-DATA
+      class Rectangle
+      end
+    DATA
+    code_wrapper <<-DATA
+      <%= user_code %>
+    DATA
+    specs <<-DATA
+      it "a class of type Rectangle is created" do
+        klass = Module.const_get('Rectangle')
+        klass.should be_a_kind_of(Class)
+      end
+    DATA
+  !release
+  
+  %p
+    This class is as yet incomplete. For a class to justify its existence,
+    it needs to have two distinct features:
+  
+  %div{:style => 'margin-left: 1em;'}
+    %ol
+      %li 
+        %strong State
+        %p
+          A class must have some kind of state that defines the attributes
+          of its instances. In the case of a simple rectangle, this could simply
+          be its length and breadth.
+      
+      %li 
+        %strong Behaviour
+        %p 
+          A class must also do something meaningful. This is achieved by
+          the programmer adding methods to the class that interact with its
+          state to give us meaningful results.
+  
+.section :state_and_behaviour, "State and behaviour", 160
+  %p
+    "What is your perimeter?" and "What is your area?" sound like an
+    interesting questions to ask of a rectangle. This behaviour will be
+    defined as methods on the class <code>Rectangle</code>.
+    
+    Starting from the behaviour and working backward is an excellent way
+    to understand exactly what state we need, something we shall address
+    in the next section.
+    
+    Since this is the first time you're creating a method, let me
+    demonstrate this for you with the perimeter, and then you can try
+    adding the area yourself.
+  
+  !enchant 3033
+    example!
+    short_name :rectangle_perimeter_first_example
+    starting_code <<-DATA
+      class Rectangle
+        def perimeter
+        end
+      end
+    DATA
+    code_wrapper <<-DATA
+      <%= user_code %>
+    DATA
+  !release
+  
+  %p
+    The keyword <code>def</code> is what we use to create a method called
+    <code>perimeter</code>.
+    
+    You will observe that Ruby follows a two-space indentation convention
+    and sections of code are typically closed using the keyword
+    <code>end</code>. Note that both the class and the method are closed
+    in this manner.
+  
+    Of course, this class still does nothing, because all we have is a
+    stateless class with an empty method. Let us now try to fill up this
+    empty method with the formula for the perimeter of a rectangle, which
+    is <em>2 * (length + breadth)</em>.
+  
+  !enchant 3034
+    example!
+    short_name :rectangle_perimeter_example
+    starting_code <<-DATA
+      class Rectangle
+        def perimeter
+          2 * (@length + @breadth)
+        end
+      end
+    DATA
+  !release
+  
+  %p
+    You'll notice that the variable names <code>length</code> and
+    <code>breadth</code> have an <code>@</code> symbol placed in front of
+    them. This is a convention which designates them as being a part
+    of the state of the class, or to use jargon, they are the "instance
+    variables of the class." This means that every instance of the class
+    Rectangle will have its own unique copies of these variables and is in
+    effect, a distinct rectangle.
+
+  %p
+    If you run this code, though, you'll see that it fails, because we
+    have no way to initialize our instances with appropriate values for
+    its length and breadth. Lets remedy this now.
+  
+  !enchant 3035
+    example!
+    short_name :rectangle_perimeter_second_example
+    starting_code <<-DATA  
+      class Rectangle
+        def initialize(length, breadth)
+          @length = length
+          @breadth = breadth
+        end
+        
+        def perimeter
+          2 * (@length + @breadth)
+        end
+      end
+    DATA
+    code_wrapper <<-DATA
+      <%= user_code %>
+    DATA
+    specs <<-DATA
+      it "perimeter of a square of side 3 should be 12" do
+        Rectangle.new(3,3).perimeter.should == 12
+      end
+      it "perimter of a rectangle with length=5, breadth=8 should be 26" do
+        Rectangle.new(5,8).perimeter.should == 26
+      end
+    DATA
+  !release
+  
+  %p
+    Observe the tests for this piece of code carefully - you'll notice
+    that we can now create instances of Rectangle that correctly tell us
+    their perimeter.
+
+  %p
+    It's your turn now - extend this class to add a method that calculates
+    area using the formula <em>length * breadth</em>.
+  
+  !enchant 3036
+    exercise!
+    short_name :rectangle_area_exercise
+    starting_code <<-DATA
+      class Rectangle
+        def initialize(length, breadth)
+         @length = length
+         @breadth = breadth
+        end
+      
+        def perimeter
+         2 * (@length + @breadth)
+        end
+        
+        #write the 'area' method here
+      end
+    DATA
+    code_wrapper <<-DATA
+      <%= user_code %>      
+    DATA
+    specs <<-DATA
+      it "area of square of length 4 should be 16" do
+        Rectangle.new(4,4).area.should == 16
+      end
+      it "area of rectangle with length=5, breadth=8 should be 40" do
+        Rectangle.new(5,8).area.should == 40
+      end
+    DATA
+  !release
+
+

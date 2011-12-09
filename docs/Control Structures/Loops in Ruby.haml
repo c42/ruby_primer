@@ -1,0 +1,150 @@
+title - Loops in Ruby
+
+.section :loops_in_ruby, "Loops in Ruby", 164
+  %p
+    Loops are programming constructs that help you repeat an action an arbitrary number of times.         
+  %p
+    You would have already covered the most important looping techniques available in Ruby 
+    in the chapter on Ruby Collections. The methods <code>Array#each</code>, <code>Array#select</code> etc.
+    are the most frequently used loops since the primary use of loops is to iterate over or transform a collection.
+  %p
+    We'll however cover two basic looping constructs using which you should be able to solve most other looping
+    requirements that may come up.
+
+  %h3 Infinite Loops  
+  %p 
+    Infinite loops keep running till you explicitly ask them to stop. They are syntactically the simplest to write. Here goes one:
+  %p
+    %pre
+      :plain
+        loop do 
+        &nbsp;&nbsp;puts "this line will get executed inifinitely" 
+        end
+  
+  %p 
+    The example above does not have a termination and hence will run till the process is stopped.
+    A loop can be halted from within using the <code>break</code> command.
+  %p
+    Now write an infinite loop where the monk will meditate till he achieves Nirvana. 
+    Use the <code>break</code> statement once Nirvana is reached. 
+    
+  !enchant 3320
+    short_name :infinite_loop_exercise
+    exercise!
+    requires []
+    starting_code <<-DATA
+      # write a loop around this statement. 
+      # remember to break when monk achieves Nirvana
+      monk.meditate unless monk.nirvana?
+      
+      
+    DATA
+    hint <<-DATA
+      <p>
+      You'll have to check whether the monk has achieved nirvana using <code>monk.nirvana?</code> and break if so.      
+      </p>
+      <p style='padding-top: 1em'>
+      If you see the error 'This thread has taken more than X seconds', it means your <code>break</code> is
+      not working, and the code is in fact running without any possible termination.
+      </p>
+    DATA
+    solution <<-DATA
+loop do
+  monk.meditate
+  break if monk.nirvana?
+end
+    DATA
+    code_wrapper <<-DATA
+      class MeditativeMonk
+        def initialize
+          @@meditation_level = 0
+        end
+        def meditate
+          @@meditation_level += 1
+        end
+        def nirvana?
+          MeditativeMonk.nirvana?
+        end
+        def self.nirvana?
+          @@meditation_level > 10
+        end
+      end
+      monk = MeditativeMonk.new
+      <%= user_code %>
+    DATA
+    specs <<-DATA      
+      it "the monk should meditate till he reaches nirvana" do
+        MeditativeMonk.should be_nirvana
+      end
+    DATA
+  !release
+    
+  %h3 Run a block of code N times
+  %p
+    Say N is 5, let us imagine how it might look. 
+    %pre
+      :plain
+        5.times do
+        &nbsp;&nbsp;# do the stuff that needs to be done
+        end
+    
+  %p
+    Well, we imagined it right. It is that simple!
+  %p
+    Here is a task for you to test your newly learned looping skills. We have
+    a bell outside our monastery that people can ring in times of need. Write
+    a method that can ring the bell N times, where N is a parameter passed to 
+    the method.    
+    
+  !enchant 3321
+    exercise!
+    requires []
+    short_name :basic_n_times_loop_exercise
+    starting_code <<-DATA            
+      # add a loop inside this method to ring the bell 'n' times
+      def ring(bell, n)
+        bell.ring
+      end            
+    DATA
+    
+    solution <<-DATA
+def ring(bell, n)
+  n.times do
+    bell.ring
+  end
+end            
+    DATA
+    
+    code_wrapper <<-DATA
+        class Bell
+          attr_reader :ring_count
+          def initialize
+            puts "The monastery has a new bell!"
+            @ring_count = 0
+          end
+          def ring
+            @ring_count += 1
+            puts "The bell has been rung for the #{@ring_count.ordinalize} time!"
+          end
+        end
+        <%= user_code %>     
+    DATA
+    
+    specs <<-DATA      
+      it "should ring the monastery bell 3 times" do
+        bell = Bell.new
+        ring(bell, 3)
+        bell.ring_count.should == 3
+      end
+      it "should ring the monastery bell 6 times for urgent matters" do
+        bell = Bell.new
+        ring(bell, 6)
+        bell.ring_count.should == 6
+      end
+    DATA
+  !release
+  
+  %p
+    We've only scratched the surface of the various ways in which Ruby lets you write loops.
+    However this should be enough for the most common use cases. Let us know
+    if you need more!

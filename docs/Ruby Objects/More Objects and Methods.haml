@@ -1,9 +1,10 @@
 title - More Objects and Methods
 
-.section :looking_up_methods, "Looking up methods in the sandbox!", 149
+.section :looking_up_methods, "Looking up methods", 149
     %p
         Ruby objects are happy to tell you what methods they provide. 
-        You simply call the <code>methods</code> method on them.
+        <span class="tweetable" data-tweet="In Ruby, you can list all the methods of an object by calling '.methods' method on it">
+        You simply call the <code>methods</code> method on them.</span>
         
 
    !enchant 2936
@@ -52,7 +53,7 @@ title - More Objects and Methods
 
       specs <<-DATA
          it "get a sorted list of methods " do
-           user_code.should be_instance_of String
+           user_code.should be_instance_of Array
            user_code.join(", ")[0..128].should == 1.methods.sort.join(", ")[0..128]
          end
       DATA
@@ -95,7 +96,8 @@ title - More Objects and Methods
         Here, <code>index</code> is the method and <code>'paper'</code> the argument.
         If there is more than one argument, they can be passed to the method by simply separating them with commas.
     %p    
-        Try using a method that takes two arguments - use the <code>between?</code> method to determine if the number <code>2</code> lies between the numbers <code>1</code> and <code>3</code>.
+        Try using a method that takes two arguments - <span class="tweetable" data-tweet="Beautiful Ruby API. 'Calling 3.between? 1,5' returns true.">
+        use the <code>between?</code> method to determine if the number <code>2</code> lies between the numbers <code>1</code> and <code>3</code>.</span>
 
 
    !enchant 2942

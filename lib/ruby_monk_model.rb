@@ -27,7 +27,7 @@ class RubyMonkModel
 
 
   def parse_lesson(lesson_filename)
-    content = File.read(lesson_filename.to_s).split("\n")
+    content = File.read(lesson_filename.to_s, :encoding => "utf-8").split("\n")
 
     title = (content.shift.gsub('title - ', '') if content.first.include? 'title -') unless content.empty?
     title ||= lesson_filename.basename.to_s.titlecase
