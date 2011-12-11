@@ -6,14 +6,15 @@ require "bundler/setup"
 $LOAD_PATH << File.dirname(__FILE__) + "/../lib"
 require 'ruby_monk_model'
 require 'ruby_monk_client'
+require 'ruby_monk_token'
 
 require 'fssm'
 require 'uuid'
 
 DOCS = File.join(File.dirname(__FILE__), '..', "docs")
-TOKEN = UUID.new.generate
 SANDBOX_URL = "http://localhost:3000/sandbox"
-CLIENT = RubyMonkClient.new(SANDBOX_URL+"/import/create", TOKEN)
+TOKEN = RubyMonkToken.new(".token").get_token
+CLIENT = RubyMonkClient.new(SANDBOX_URL + "/import/create", TOKEN)
 UPDATE_FREQUENCY_SECONDS = 5
 
 puts "Visit #{SANDBOX_URL}/?sandbox_token=#{TOKEN} to see the content.\n\n"

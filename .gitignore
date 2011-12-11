@@ -9,3 +9,5 @@ tmp
 config/database.yml
 config/application.yml
 public/system/
+Gemfile.lock
+.token
