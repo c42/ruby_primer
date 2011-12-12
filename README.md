@@ -95,7 +95,7 @@ The Ruby Primer is targeted at programmers who are learning Ruby for the first t
 - Ruby - CRuby 1.9.2 and upwards are supported.
 - Bundler (gem)
 
-We have tested the Ruby Primer sandbox clinet on Linux and Mac OS X. We welcome help in ensuring compatibility with Windows.
+The Ruby Primer sandbox client has been tested on Linux and Mac OS X. We welcome help in ensuring compatibility with Windows.
 
 ## License
 This work is under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0/) License.
