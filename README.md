@@ -10,9 +10,9 @@ The Ruby Primer is an open collaboration initiative that uses the [RubyMonk][] p
 ## How to Contribute
 
 - Fork this repository.
-- Make your changes in `docs/`
 - run `bundle install && bin/rubymonk.rb` to generate the URL to your very own RubyMonk sandbox.
-- Use the generated URL to preview your work.
+- Use the generated URL to preview the contents in the sandbox.
+- Make your changes in `docs/`. The sandbox URL will get updated with your changes as you make them.
 - Once you are happy with your changes, send us a pull request with a clear description of changes you've done.
 - Like any other open-source project, your pull request will be reviewed and then merged.
 
@@ -30,6 +30,9 @@ All the content is inside `docs/`.
 The lessons are placed inside `docs/<chapter>/<lesson_name>`.
 
 The lessons make use of standard [Haml markup][] for content. It is interspersed with metadata that allows you to define code blocks.
+
+Every lesson starts with a `section`. A section needs a `short_name` and a `title`. 
+
 Here is a template:
 
     title - <Title of the lesson>
@@ -65,8 +68,9 @@ The `!enchant` starts a block of exercise. Use `!release` once you are done. Eve
 - `exercise!` or `example!` : An exercise has specs which have to pass for the user to continue. An example can be run, but does not affect the user's progress.
 - `short_name` : short_name is used in the URLs for referring to the section.
 - `starting_code` : Sample code that will appear by default in the code-block.
-- `code_wrapper` : Custom method that will digest user code.
-- `specs` : RSpec block that tests the custom `code_wrapper` method.
+- `code_wrapper` : This is the block of code where you create a method to wrap the code
+ written by the user. RubyMonk uses ERB templating to render it, the user's code is passed in as the variable `user_code`.
+- `specs` : RSpec block that tests the method in the `code_wrapper`.
 
 An exercise needs to have:
 
@@ -78,18 +82,28 @@ An example needs to have:
 
 - `starting_code`
 
-The numbers in the `section` and `enchant` lines are the `id`s of the metadata. If you are creating a new section, don't bother about them. When modifiying existing section/enchant, please do not change the `id`.
+The numbers in the `section` and `enchant` lines are the `id`s of the metadata. You can skip adding a number there if you are creating a new section. But when modifiying existing section/enchant blocks that have an `id`, please leave them as is.
 
 Go ahead and check out the existing lessons to get a hold of the DSL better.
 
-### Prerequisites
+## Scope
 
-- Ruby - CRuby 1.9.2 and upward are supported.
+The Ruby Primer is targeted at programmers who are learning Ruby for the first time. However people who are completely new to programming have also found it useful. The scope of The Ruby Primer is to cover just enough basics to help one get started with Ruby.
+
+## Prerequisites
+
+- Ruby - CRuby 1.9.2 and upwards are supported.
 - Bundler (gem)
+
+We have tested the Ruby Primer sandbox clinet on Linux and Mac OS X. We welcome help in ensuring compatibility with Windows.
+
+## License
+This work is under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0/) License.
 
 ## Got any questions? Talk to us!
 
 - Twitter: [@rubymonk](http://twitter.com/#!/rubymonk 'RubyMonk')
+- email: [rubymonk@c42.in](mailto:rubymonk@c42.in)
 - IRC: #rubymonk @ irc.freenode.net
 
 [RubyMonk]: http://rubymonk.com
