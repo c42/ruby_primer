@@ -20,11 +20,17 @@ class RubymonkModel
 
   private
   def lessons(chapter_directory_name)
-    Pathname.glob("#{@base_path}/#{chapter_directory_name}/*").map do |lesson_filename|
+    sort_lessons(chapter_directory_name).map do |lesson_filename|
       parse_lesson(lesson_filename)
     end
   end
 
+  def sort_lessons(chapter_directory_name)
+    Pathname.glob("#{@base_path}/#{chapter_directory_name}/*").sort_by do |filename|
+      filename.basename.to_s =~ /^(\d+).-/
+      [$1.to_i]
+    end
+  end
 
   def parse_lesson(lesson_filename)
     content = File.read(lesson_filename.to_s, :encoding => "utf-8").split("\n")

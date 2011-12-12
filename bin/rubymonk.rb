@@ -4,9 +4,9 @@ require "rubygems"
 require "bundler/setup"
 
 $LOAD_PATH << File.dirname(__FILE__) + "/../lib"
-require 'ruby_monk_model'
-require 'ruby_monk_client'
-require 'ruby_monk_token'
+require 'rubymonk_model'
+require 'rubymonk_client'
+require 'rubymonk_token'
 
 require 'fssm'
 require 'uuid'
