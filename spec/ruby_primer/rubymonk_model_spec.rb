@@ -28,7 +28,7 @@ describe RubymonkModel do
 
     it "reads the content of the lesson haml" do
       sample_content = <<-DATA
-.section :sample_lesson, "This is a sample lesson", 41
+.section :sample_lesson, "This is a sample lesson"
   %p
     Sample lesson
 DATA

@@ -13,7 +13,7 @@ describe RubymonkClient do
     end
 
     it "makes a POST request" do
-      @client.sync_data(@chapters)
+      @client.sync_data(@chapters).should be_ok
     end
   end
 end
