@@ -1,7 +1,7 @@
 require 'wrest'
 require 'json'
 
-class RubyMonkClient
+class RubymonkClient
   def initialize(post_url, auth_token)
     @post_url = post_url
     @auth_token = auth_token

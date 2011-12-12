@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe RubyMonkModel do
+describe RubymonkModel do
 
   describe "create a hash from the given directory" do
 
     before(:each) do
       @fixtures_root = File.join(File.dirname(__FILE__), '..', 'fixtures', "docs")
-      @model = RubyMonkModel.new(@fixtures_root)
+      @model = RubymonkModel.new(@fixtures_root)
       @content = @model.build_hash
       @chapters = @content["chapters"]
 

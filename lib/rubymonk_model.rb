@@ -1,6 +1,6 @@
 require 'pathname'
 
-class RubyMonkModel
+class RubymonkModel
   def initialize(path)
     @base_path = path
     @chapter_directories = Pathname.glob(@base_path + "/*").map(&:basename)

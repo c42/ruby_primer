@@ -13,8 +13,8 @@ require 'uuid'
 
 DOCS = File.join(File.dirname(__FILE__), '..', "docs")
 SANDBOX_URL = "http://localhost:3000/sandbox"
-TOKEN = RubyMonkToken.new(".token").get_token
-CLIENT = RubyMonkClient.new(SANDBOX_URL + "/import/create", TOKEN)
+TOKEN = RubymonkToken.new(".token").get_token
+CLIENT = RubymonkClient.new(SANDBOX_URL + "/import/create", TOKEN)
 UPDATE_FREQUENCY_SECONDS = 5
 
 puts "Visit #{SANDBOX_URL}/?sandbox_token=#{TOKEN} to see the content.\n\n"
@@ -28,7 +28,7 @@ def monitor
 end
 
 def republish
-  content_hash = RubyMonkModel.new(DOCS).build_hash.merge({ "sandbox_token" => TOKEN })
+  content_hash = RubymonkModel.new(DOCS).build_hash.merge({ "sandbox_token" => TOKEN })
   begin
     response = CLIENT.sync_data(content_hash)
     if response.ok?
