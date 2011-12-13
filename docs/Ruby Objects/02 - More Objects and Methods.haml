@@ -1,0 +1,120 @@
+title - More Objects and Methods
+
+.section :looking_up_methods, "Looking up methods", 149
+    %p
+        Ruby objects are happy to tell you what methods they provide. 
+        <span class="tweetable" data-tweet="In Ruby, you can list all the methods of an object by calling '.methods' method on it">
+        You simply call the <code>methods</code> method on them.</span>
+        
+
+   !enchant 2936
+      short_name :list_of_methods
+      example!
+      starting_code <<-DATA
+               1.methods
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+      DATA
+
+   !release
+
+    %p
+        As you can see, you get a listing of all the methods on the number <code>1</code> that you could invoke. 
+        The names are prefixed with a colon (<code>:</code>) that you can safely ignore for now.
+        If you find the results too muddled, you can easily sort them alphabetically.
+                
+        Try it for yourself - simply call the method <code>sort</code> on the result of <code>methods</code>:
+
+
+   !enchant 2937
+      short_name :sort_methods_list
+      exercise!
+      starting_code <<-DATA
+               1.methods
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         1.methods.sort
+      DATA
+
+      specs <<-DATA
+         it "get a sorted list of methods " do
+           user_code.should be_instance_of Array
+           user_code.join(", ")[0..128].should == 1.methods.sort.join(", ")[0..128]
+         end
+      DATA
+
+   !release
+    
+
+.section :methods_with_arguments, "Invoking methods with arguments", 150
+    %p
+        When talking to an object via its methods, it is possible to give it additional information
+        so it can give you an appropriate response.
+    %p
+        This additional information is called the "arguments to a method." The 
+        name "argument" does makes a certain kind of sense if you stop to think 
+        about the fact that methods are the paths of communication between objects.
+    %p
+        Here's an example of an argument to the method <code>index</code>, which finds the position of the argument in the array:
+
+
+   !enchant 2941
+      short_name :argument_to_method
+      example!
+      starting_code <<-DATA
+               ['rock','paper','scissors'].index('paper')
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+      DATA
+
+   !release
+    
+    %p
+        Here, <code>index</code> is the method and <code>'paper'</code> the argument.
+        If there is more than one argument, they can be passed to the method by simply separating them with commas.
+    %p    
+        Try using a method that takes two arguments - <span class="tweetable" data-tweet="Beautiful Ruby API. 'Calling 3.between? 1,5' returns true.">
+        use the <code>between?</code> method to determine if the number <code>2</code> lies between the numbers <code>1</code> and <code>3</code>.</span>
+
+
+   !enchant 2942
+      short_name :method_between
+      exercise!
+      starting_code <<-DATA
+        2
+      DATA
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+      solution "2.between? 1,3"
+      specs <<-DATA
+         it "check whether the number two is between one and three" do
+           user_code.should eq true
+         end
+      DATA
+   !release

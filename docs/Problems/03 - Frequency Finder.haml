@@ -1,0 +1,60 @@
+title - Find the frequency of a string in a sentence
+
+.section :find_word_frequency, "Find the word frequency in given sentence", 113
+  %p
+    Given a sentence containing multiple words, find the frequency of a given word in that sentence. 
+
+  %p
+    Construct a method named 'find_frequency' which accepts two arguments 'sentence' and 'word', 
+    both of which are Strings objects. 
+    
+  %p
+    <strong>Example:</strong>The method, given 'Ruby is The best language in the World' and 'the', 
+    should return 2 (comparison should be case-insensitive). 
+  
+  %p
+    <strong>Hint:</strong> You can use the method <code>Array#count</code> to count the frequency of 
+    any element in the given array. eg:
+    %pre
+      [9,3,4,9,5].count(9) 
+    Will return the value 2
+    
+
+   !enchant 584
+      short_name :find_word_frequency
+      exercise!
+      starting_code <<-DATA
+               def find_frequency(sentence, word)
+                 # Your code here
+               end
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+      solution <<-DATA
+         def find_frequency(sentence, word)
+           sentence.downcase.split.count(word.downcase)
+         end
+      DATA
+
+      specs <<-DATA
+         it "'Do or do not... there is no try.' has two 'do's" do
+           find_frequency('Do or do not... there is no try.','do').should eq(2)
+         end
+         
+         it "'Judge me by size, do you?' does not have 'Yoda'" do
+           find_frequency('Judge me by size, do you?','Yoda').should eq(0)
+         end
+         
+         it "'Named must your fear be before banish it you can.' has one 'fear'" do
+           find_frequency('Named must your fear be before banish it you can.','fear').should eq(1)
+         end
+         
+         it "Frequency of the word 'hello' in the sentence 'hello' should be 1" do
+           find_frequency("hello","hello").should eq(1)
+         end
+      DATA
+
+   !release

@@ -1,0 +1,57 @@
+title - Build a calculator that does addition and subtraction
+
+.section :split, "Splitting Strings", 126
+  %p
+    Create a class Calculator, which performs the addition and subtraction of two numbers at a time. The sample code explains the expected API.
+  
+
+   !enchant 927
+      short_name :string_split_simple
+      exercise!
+      starting_code <<-DATA
+             class Calculator
+               def add(a, b)
+                # your code here
+               end
+               
+               def subtract(a, b)
+                # your code here
+               end
+             end
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+      solution <<-DATA
+         class Calculator  
+           def add(num_1, num_2)
+             num_1 + num_2
+           end
+         
+           def subtract(num_1, num_2)
+             num_1 - num_2
+           end
+         end
+      DATA
+
+      specs <<-DATA
+         describe Calculator do
+           context "addition" do
+             it "adding 2 and 3 gives 5" do
+               Calculator.new.add(2,3).should eq(5)
+             end
+             
+             it "adding 4 and -4 gives 0" do
+               Calculator.new.add(4,-4).should eq(0)
+             end
+             
+             it "Subtracting 2 from 5 gives 3" do
+               Calculator.new.subtract(5,2).should eq(3)
+             end
+           end
+         end
+      DATA
+
+   !release

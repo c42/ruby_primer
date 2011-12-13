@@ -1,0 +1,316 @@
+title - String Basics
+
+.section :string_interpolation, "String Interpolation", 141
+ %p
+  It is essential to be able to replace placeholders within a string with values they represent. In the programming 
+  paradigm, this is called "string interpolation". In Ruby, string interpolation is extremely easy. 
+  Feel free to run the example below to see the sample in action.
+
+ %p
+
+   !enchant 2465
+      short_name :string_interpolation_example
+      example!
+      starting_code <<-DATA
+             a = 1
+             b = 4
+             puts "The number #{a} is less than #{b}"
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+   !release
+
+ %p
+  Do remember that placeholders aren't just variables. Any valid block of Ruby code you place inside <code>#{'#{}'}</code> will be evaluated and inserted at that location.
+  
+  Isn't that very neat?
+
+ %p
+  Now let us see you wield this tool. Complete the functionality of the method below which, 
+  given a String as the argument, inserts the length of that String into another String:
+  
+
+   !enchant 2466
+      short_name :string_interpolation_length
+      exercise!
+      starting_code <<-DATA
+             def string_length_interpolater(incoming_string)
+               "The string you just gave me has a length of #{}"
+             end
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+         
+      DATA
+
+      solution <<-DATA
+         def string_length_interpolater(incoming_string)
+           "The string you just gave me has a length of #{incoming_string.length}"
+         end
+      DATA
+
+      specs <<-DATA
+         it "interpolates 2 when I pass 'Hi'" do
+           string_length_interpolater("hi").should ==   "The string you just gave me has a length of 2"
+         end
+         
+         it "interpolates 4 when I pass 'Good'" do
+           string_length_interpolater("good").should ==   "The string you just gave me has a length of 4"
+         end
+      DATA
+
+   !release
+  
+  %p
+    We've been using double quotes in all our string interpolation examples.
+    A String literal created with single quotes does <i>not</i> support interpolation.
+   
+  %p
+    The essential difference between using single or double quotes is that double quotes allow for
+    escape sequences while single quotes do not. What you saw above is one such example. 
+    <code>“\n”</code> is interpreted as a new line and appears as a new line when rendered to the user, whereas
+    <code>'\n'</code> displays the actual escape sequence to the user.
+  
+  %p
+    Let us move on...
+
+
+.section :search, "Search in a String", 142
+  %p
+    Another common scenario is checking if a String contains any given character, word or
+    sub-string. Considering your experience with the Ruby API and it's intuitiveness, try and
+    check whether the String given below includes 'Yoda'.
+
+
+   !enchant 2470
+      short_name :string_include
+      exercise!
+      starting_code <<-DATA
+               "[Luke:] I can’t believe it. [Yoda:] That is why you fail."
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         "[Luke:] I can’t believe it. [Yoda:] That is why you fail.".include? 'Yoda'
+      DATA
+
+      specs <<-DATA
+         it "detects when the string includes 'Yoda'" do
+           user_code.should == true
+         end
+      DATA
+
+      hint <<-DATA
+         String#include?
+      DATA
+
+   !release
+
+  %p
+    Did you manage to figure that out by yourself? Too many cooks spoil the broth while too many hints lead the
+    hunter astray! Now check if the string below starts with 'Ruby'.
+  
+
+   !enchant 2471
+      short_name :string_start_with
+      exercise!
+      starting_code <<-DATA
+               "Ruby is a beautiful language"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         "Ruby is a beautiful language".start_with? "Ruby"
+      DATA
+
+      specs <<-DATA
+         it "detects whether the string starts with 'Ruby'" do
+           user_code.should == true
+         end
+      DATA
+
+      hint <<-DATA
+         String#start_with?
+      DATA
+
+   !release
+  
+  %p
+    After that, checking whether the statement below ends with 'Ruby' should be easy.
+  
+
+   !enchant 2472
+      short_name :string_end_with
+      exercise!
+      starting_code <<-DATA
+               "I can't work with any other language but Ruby"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         "I can't work with any other language but Ruby".end_with? 'Ruby'
+      DATA
+
+      specs <<-DATA
+         it "detects whether the string ends with 'Ruby'" do
+           user_code.should == true
+         end
+      DATA
+
+      hint <<-DATA
+         String#end_with?
+      DATA
+
+   !release
+  
+  %p
+    Are you getting a hang of the Ruby API? The previous three methods all ended with a '?'.
+    It is conventional in Ruby to have '?' at the end of the method if that method
+    returns only boolean values. Though it is not mandated by the syntax, this practice is
+    highly recommended as it increases the readability of code.
+
+  %p
+    Sometimes we will be required to know the index of a particular character or a sub-string
+    in a given String and conveniently Ruby provides a method on String that does exactly that. Try and
+    find out the index of 'R' in the string below:
+    
+
+   !enchant 2473
+      short_name :string_index
+      exercise!
+      starting_code <<-DATA
+               "I am a Rubyist"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         "I am a Rubyist".index 'R'
+      DATA
+
+      specs <<-DATA
+         it "finds the index of the letter 'R'" do
+           user_code.should == 7
+         end
+      DATA
+
+      hint <<-DATA
+         String#index
+      DATA
+
+   !release
+
+
+.section :case_change, "String case change", 143
+  %p
+    The last thing we will look into in this lesson is manipulating
+    the case of strings. Ruby provides us with a convenient tool-set to take care of proper
+    and consistent casing within strings. Let's start with converting a string in lower case to upper case.
+
+
+   !enchant 2479
+      short_name :string_upcase
+      example!
+      starting_code <<-DATA
+               puts 'i am in lowercase'.upcase #=> 'I AM IN LOWERCASE'
+      DATA
+
+      code_wrapper <<-DATA
+         <%= user_code %>
+      DATA
+
+   !release
+
+  %p
+    Similarly, one can convert a string to lower case as well. Ruby
+    calls this method <code>downcase</code>. Convert the string below into lower case.
+
+
+   !enchant 2480
+      short_name :string_downcase
+      exercise!
+      starting_code <<-DATA
+               'This is Mixed CASE'
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         'This is Mixed CASE'.downcase
+      DATA
+
+      specs <<-DATA
+         it "converts the statement to downcase" do
+           user_code.should == 'This is Mixed CASE'.downcase
+         end
+      DATA
+
+      hint <<-DATA
+         String#downcase
+      DATA
+
+   !release
+
+  %p
+    On a parting note, let us touch on an interesting method. When you
+    encounter a mixed cased string, Ruby provides a way to swap the case of 
+    every character in it i.e. this method would convert "I Am MixEd" to "i aM mIXeD".
+    Try figure this method out and tell us if you ever come across a scenario where 
+    you find use for this. It might make a good story for a rainy night!
+
+
+   !enchant 2481
+      short_name :string_swapcase
+      exercise!
+      starting_code <<-DATA
+               "ThiS iS A vErY ComPlEx SenTeNcE"
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         "ThiS iS A vErY ComPlEx SenTeNcE".swapcase
+      DATA
+
+      specs <<-DATA
+         it "swaps the case of every letter in the statement" do
+           user_code.should == "ThiS iS A vErY ComPlEx SenTeNcE".swapcase
+         end
+      DATA
+
+      hint <<-DATA
+         String#swapcase
+      DATA
+
+   !release

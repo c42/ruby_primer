@@ -1,0 +1,263 @@
+title - Introduction to Arrays
+
+.section :empty_arrays, "Empty arrays", 1
+  %p
+    Let us begin this journey by creating an empty array. It's easier than you think. 
+    There is a <code>[]</code> typed into the code editor already. 
+    This is how you create an array. Just click on 'Run', or better yet, 
+    hit <code>Ctrl+Enter</code> or <code>Cmd+Enter</code>.
+    
+
+   !enchant 3
+      short_name :build_empty_array
+      example!
+      starting_code <<-DATA
+               []
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         
+         it "return an array" do
+           user_code.should be_an Array
+         end
+         
+         it "the array should be empty" do
+           user_code.should be_empty
+         end
+      DATA
+
+   !release
+    
+  %p
+    The results you're looking at are the consequence of running a series of tests against your input to validate it.
+    If you see results coloured red, this means one or more tests failed. Green means you're good to go.
+
+
+.section :building_arrays, "Building arrays", 7
+  %p
+    You can create an array with a set of values by simply placing them inside <code>[]</code> like this: 
+    <code>[1, 2, 3]</code>. 
+    Try this out by creating an array with the numbers 1 through 5, inclusive.
+
+   !enchant 84
+      short_name :build_array_with_one_to_five
+      exercise!
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         
+         it "returns an array" do
+           user_code.should be_an Array
+         end
+         
+         it "is initialized with 1..5" do
+           user_code.should eq [1,2,3,4,5]
+         end
+      DATA
+
+   !release
+
+  %p
+    Arrays in Ruby allow you to store any kind of objects in any combination with no restrictions on type. 
+    Thus, the literal array <code>[1, 'one', 2, 'two']</code> mixes <code>Integers</code> and <code>Strings</code> and is perfectly valid.
+
+
+.section :indexing_arrays, "Looking up data in Arrays", 107
+  %p
+    Looking up values within an array is easily done using an index. Like most languages, arrays in Ruby 
+    have indexes starting from 0.
+    The example below demonstrates how to look up the third value in an array.
+  %p
+
+   !enchant 109
+      short_name :look_up_value_by_index_simple_example
+      example!
+      starting_code <<-DATA
+               [1, 2, 3, 4, 5][2]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+         <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "the value at index '2' should be 3" do
+           user_code.should == 3
+         end
+      DATA
+
+   !release
+  %p
+    Now it's your turn - extract the 5th value from the array below. Remember that the n<sup>th</sup> value 
+    in an array has an index of n-1.
+
+   !enchant 122
+      short_name :look_up_value_by_index
+      exercise!
+      starting_code <<-DATA
+               [1, 2, 3, 4, 5, 6, 7]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+         <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "the value at index '4' should be 5" do
+           user_code.should == 5
+         end
+      DATA
+
+   !release
+
+  %p
+   <span class="tweetable" data-tweet="Looking up a Ruby array with an index of -1, will give you the last element in that array">Array indexes can also start from the end of the array, rather than the beginning! 
+   In Ruby, this is achieved by using negative numbers.
+   This is called reverse index lookup.</span> In this case, the values of the index start at -1 and become smaller.
+   The example below returns the first value in the array.
+ 
+ %p
+
+   !enchant 137
+      short_name :reverse_index_look_up_value_by_index_simple_example
+      example!
+      starting_code <<-DATA
+               [1, 2, 3, 4, 5][-5]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "the value at index '-5' should be 1" do
+           user_code.should == 1
+         end
+      DATA
+
+   !release
+  %p 
+    Go ahead on try it out - extract the last value from the array below.
+
+   !enchant 139
+      short_name :reverse_index_look_up_value_by_index_simple
+      exercise!
+      starting_code <<-DATA
+               [1, 2, 3, 4, 5]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "the value at index '-1' should be 5" do
+           user_code.should == 5
+         end
+      DATA
+
+      hint <<-DATA
+         Index of the last element will be -1
+      DATA
+
+   !release
+
+
+.section :growing_arrays, "Growing arrays", 9
+  %p
+    In Ruby, the size of an array is not fixed. Also, any object of any type can be added to an array,
+    not just numbers. How about appending the String <code>"woot"</code> to an array? Try using <code><<</code> - that's the 'append'
+    function - to add it to the array below.
+
+
+   !enchant 11
+      short_name :append
+      exercise!
+      starting_code <<-DATA
+              [1, 2, 3, 4, 5]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "append 'woot' to the end of the array" do
+           user_code.should eq [1,2,3,4,5,'woot']
+         end
+      DATA
+
+      hint <<-DATA
+         Array  <<  new_element
+      DATA
+
+   !release
+
+  %p
+    Unlike many other languages, you will always find multiple ways to perform the same action in Ruby. 
+    To append a new element to a given array, you can also use <code>push</code> 
+    method on an array. Add the string <code>"woot"</code> to given array by calling <code>push</code>.
+      
+
+   !enchant 253
+      short_name :append_with_push
+      exercise!
+      starting_code <<-DATA
+             [1, 2, 3, 4, 5]
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+         [1, 2, 3, 4, 5].push("woot")
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+         it "append 'woot' to the end of the array" do
+           user_code.should eq [1,2,3,4,5,'woot']
+         end
+      DATA
+
+      hint <<-DATA
+         Invoking methods on Ruby objects follows a syntax similar to Java and C++. Basically, place a period after the object, then the method name. 
+         
+         Any arguments to the method are placed in brackets after the method name, comma separated.
+      DATA
+
+   !release
+
+  %p
+    Using '<<' is the most common method to add an element to an Array. There are other ways as well, 
+    but we will touch upon them later.

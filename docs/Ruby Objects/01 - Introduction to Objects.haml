@@ -1,0 +1,119 @@
+title - Introduction to Objects
+
+.section :everything_is_an_object, "Everything is an object", 147
+  %p
+    <span class="tweetable" data-tweet="In Ruby there are no primitives. Everything is an object - integers, characters, arrays - everything.">In Ruby, just like in real life, our world is filled with objects.
+    Everything is an object - integers, characters, text, arrays - everything.</span>
+  
+  %p
+    To make things happen using Ruby, one always puts oneself in the place of an
+    object and then has conversations with other objects, telling them to do stuff.
+  
+  %p
+    Roleplaying as an object in your program is an integral part of object-oriented programming. 
+    To know which object you are at the moment, one may use the keyword <code>self</code>. 
+  
+  %p  
+    Try it for yourself:
+
+   !enchant 2925
+      short_name :self_example
+      example!
+      starting_code <<-DATA
+             self
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect.gsub(/RSpec::Core::ExampleGroup::Nested_.*$/,"main")
+      DATA
+
+   !release
+  
+  %p
+    As you can see, if you don't specify which object you are, you automatically play the role
+    of the <code>main</code> object that Ruby provides us by default.
+  
+  %p
+    We'll delve into how one can play the role of different objects and why this is useful a little further down the line.
+
+
+.section :talking_to_objects, "Talking to objects", 148
+    %p
+      One object interacts with another by using what are called its
+      <code>methods</code>. More specifically, one object "calls or invokes
+      the methods" of another object.
+      
+    %p        
+      In the example below, <span class="tweetable" data-tweet="Ruby is so much fun to use. Calling 2.even? returns true in Ruby.">
+      we call the method <code>even?</code> on the
+      object that is the number <code>2</code></span> by placing a period
+      (<code>.</code>) after the object, then adding in the name of the
+      method we want to invoke.
+
+
+   !enchant 2928
+      short_name :talking_to_object
+      example!
+      starting_code <<-DATA
+               2.even?
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      specs <<-DATA
+         puts user_code.inspect
+      DATA
+
+   !release
+    
+    %p
+      Invoking a method on an object inevitably generates a response.
+      Implicitly, this response is always another object.
+      <span class="tweetable" data-tweet="In ruby, calling the method next on the object 1 has it give us the next consecutive value, 2.">
+      Calling the method <code>next</code> on the object <code>1</code> has
+      it give us the next consecutive value, <code>2</code>.</span>
+      
+    %p
+      One may also chain method invocations by simply adding more periods
+      and method names sequentially - each method in the chain is called on
+      the result of the previous method.
+
+      Go on and try it by invoking <code>next</code> twice on <code>1</code>
+      to get <code>3</code>.
+
+
+   !enchant 2929
+      short_name :method_chaining
+      exercise!
+      starting_code <<-DATA
+               1
+      DATA
+
+      code_wrapper <<-DATA
+         def user_code
+           <%= user_code %>
+         end
+      DATA
+
+      solution <<-DATA
+1.next.next
+      DATA
+
+      specs <<-DATA
+         puts user_code
+         it "next called on 1 twice returns three" do
+           user_code.should == 3
+         end
+      DATA
+
+   !release
