@@ -12,7 +12,7 @@ require 'fssm'
 require 'uuid'
 
 DOCS = File.join(File.dirname(__FILE__), '..', "docs")
-SANDBOX_URL = "http://localhost:3000/sandbox"
+SANDBOX_URL = "http://rubymonk-staging.heroku.com/sandbox"
 TOKEN = RubymonkToken.new(".token").get_token
 CLIENT = RubymonkClient.new(SANDBOX_URL + "/import/create", TOKEN)
 UPDATE_FREQUENCY_SECONDS = 5
