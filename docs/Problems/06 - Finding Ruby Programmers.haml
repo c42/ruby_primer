@@ -1,0 +1,128 @@
+title - Hiring Ruby Programmers
+
+.section :finding_ruby_programmers, "Hiring Ruby Programmers"
+
+  %p
+    Let us say you are trying to recruit team-members for your new startup! Given a <code>candidate</code>,
+    you need an expression that will tell you whether they fit into certain types.
+    This is how a <code>candidate</code> object would look:
+  %p
+    %pre{:style => 'font-size: 12px;'}
+      candidate.years_of_experience = 4
+      candidate.github_points = 293
+      candidate.languages_worked_with = ['C', 'Ruby', 'Python', 'Clojure']
+      candidate.applied_recently? = false
+      candidate.age = 26
+  %p
+    We are looking to hire experienced <b>Ruby programmers</b>. Our ideal candidate has <b>more
+    than 2 years experience</b>, but some programmers become really good even before that.
+    We'll consider their Github points (a nice indicator of a good programmer), and even if they are not experienced,
+    candidates with <b>500 Github points or more</b> can apply. And there is one more catch:
+    Ruby being a cool and awesome language, a lot of smart youngsters are very good at it. We love those kids,
+    but for this particular job we'd rather have them study at school than work. Let us filter out candidates who
+    are <b>younger than 15</b>. Also we don't want to consider <b>candidates who applied recently</b> for this opening.
+  %p
+    If you haven't solved these types of expressions before, try getting one condition right at a time. For each condition
+    you get correct, some tests will start passing. As your expression matures to take care of all the criteria, all the tests will pass
+    and you'll have a green flag. Now, march on!
+
+  !enchant 3272
+    short_name :hiring_experienced_programmers
+    exercise!
+    code_wrapper <<-DATA
+      def user_code_input
+        <<-USER_INPUT
+        <%= user_code %>
+        USER_INPUT
+      end
+    DATA
+
+    hint <<-DATA
+      1. Use parantheses generously. If you start your expression with a 'not' operator, wrap everything inside a parantheses. <br/>
+      2. You can have 2 or more years of experience, or  >= 500 Github points, or both. <br/>
+      3. languages_worked_with is an Array. How do you check whether an element exists in an Array? Might want to refer to the Ruby Collections chapter for inspiration!
+    DATA
+
+    starting_code <<-DATA
+      is_an_experienced_programmer = # Fill your expression here
+
+
+
+
+    DATA
+    solution <<-DATA
+is_an_experienced_ruby_programmer =
+  (candidate.languages_worked_with.include? 'Ruby') and
+  (candidate.years_of_experience >= 2 or candidate.github_points >= 500) and
+  not (candidate.age < 15 or candidate.applied_recently?)
+    DATA
+
+    specs <<-SPECS_DATA
+      it "a programmer who has the 3 years of experience is accepted" do
+        candidate = OpenStruct.new
+        candidate.years_of_experience = 3
+        candidate.github_points = 0
+        candidate.age = 25
+        candidate.languages_worked_with = ['Scala', 'Ruby', 'Java']
+        def candidate.applied_recently?
+          false
+        end
+        eval(user_code_input).should be
+      end
+      it "a programmer with 600 github points is accepted" do
+        candidate = OpenStruct.new
+        candidate.years_of_experience = 1
+        candidate.github_points = 600
+        candidate.age = 25
+        candidate.languages_worked_with = ['Scala', 'Ruby', 'Java']
+        def candidate.applied_recently?
+          false
+        end
+        eval(user_code_input).should be
+      end
+      it "programmers who do not list Ruby among languages that they've worked with are not considered" do
+        candidate = OpenStruct.new
+        candidate.years_of_experience = 3
+        candidate.github_points = 555
+        candidate.age = 25
+        candidate.languages_worked_with = ['Scala', 'Java']
+        def candidate.applied_recently?
+          false
+        end
+        eval(user_code_input).should_not be
+      end
+      it "a programmer who has applied recently is not considered" do
+        candidate = OpenStruct.new
+        candidate.years_of_experience = 3
+        candidate.github_points = 555
+        candidate.age = 25
+        candidate.languages_worked_with = ['Scala', 'Java', 'Ruby']
+        def candidate.applied_recently?
+          true
+        end
+        eval(user_code_input).should_not be
+      end
+      it "programmers with neither 2 years experience nor 500 Github points are not considered" do
+        candidate = OpenStruct.new
+        candidate.years_of_experience = 1
+        candidate.github_points = 200
+        candidate.age = 25
+        candidate.languages_worked_with = ['Scala', 'Java', 'Ruby']
+        def candidate.applied_recently?
+          false
+        end
+        eval(user_code_input).should_not be
+      end
+      it "smart kids are sadly not considered" do
+        candidate = OpenStruct.new
+        candidate.years_of_experience = 3
+        candidate.github_points = 600
+        candidate.age = 10
+        candidate.languages_worked_with = ['Scala', 'Java', 'Ruby']
+        def candidate.applied_recently?
+          false
+        end
+        eval(user_code_input).should_not be
+      end
+    SPECS_DATA
+  !release
