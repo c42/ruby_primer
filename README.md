@@ -41,13 +41,17 @@ Here is a template:
          A paragraph. You can use any valid Haml here. Be mindful of the spacing though!
 
       !enchant
+      
         short_name :short_name_of_the_exercise
+        
         exercise!
+        
         starting_code <<-DATA
           # sample starting code.
           # uses Ruby's multiline construct.
           # code that will appear in the block by default.
         DATA
+        
         code_wrapper <<-DATA
           # you can use ERB templating here.
           # the user_code is passed as a variable to the templating engine.
@@ -55,12 +59,14 @@ Here is a template:
             <%= user_code %>
           end
         DATA
+        
         specs <<-DATA
           #
           it "the user should give the string xyz to pass this spec" do
             method_that_gives_result_of_the_users_input.should eq('xyz')
           end
         DATA
+        
       !release
 
 The `!enchant` starts a block of exercise. Use `!release` once you are done. Every `!enchant` block mandatorily requires the following attributes:
