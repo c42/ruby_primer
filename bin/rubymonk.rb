@@ -17,6 +17,8 @@ TOKEN = RubymonkToken.new(".token").get_token
 CLIENT = RubymonkClient.new(SANDBOX_URL + "/import/create", TOKEN)
 UPDATE_FREQUENCY_SECONDS = 5
 
+puts ""
+puts "!!!! READ THIS !!!!"
 puts "Visit #{SANDBOX_URL}/?sandbox_token=#{TOKEN} to see the content.\n\n"
 
 def monitor
