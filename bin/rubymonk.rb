@@ -33,6 +33,7 @@ def republish
   content_hash = RubymonkModel.new(DOCS).build_hash.merge({ "sandbox_token" => TOKEN })
   begin
     response = CLIENT.sync_data(content_hash)
+    puts Time.now
     if response.ok?
       puts "Success."
     elsif response.bad_request?
