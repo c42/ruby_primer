@@ -6,20 +6,23 @@ require "bundler/setup"
 $LOAD_PATH << File.dirname(__FILE__) + "/../lib"
 require 'rubymonk_model'
 require 'rubymonk_client'
-require 'rubymonk_token'
+require 'rubymonk_client_config'
 
 require 'fssm'
 require 'uuid'
 
-DOCS = File.join(File.dirname(__FILE__), '..', "docs")
-SANDBOX_URL = "http://rubymonk-staging.heroku.com/sandbox"
-TOKEN = RubymonkToken.new(".token").get_token
-CLIENT = RubymonkClient.new(SANDBOX_URL + "/import/create", TOKEN)
+CONFIG = RubymonkClientConfig.new(".rubymonk_open").get
+SANDBOX_URL = CONFIG["sandbox_server"]
+SANDBOX_TOKEN = CONFIG["sandbox_token"]
+
+CLIENT = RubymonkClient.new(SANDBOX_URL+ "/import/create", SANDBOX_TOKEN)
+
 UPDATE_FREQUENCY_SECONDS = 5
+DOCS = File.join(File.dirname(__FILE__), '..', "docs")
 
 puts ""
 puts "!!!! READ THIS !!!!"
-puts "Visit #{SANDBOX_URL}/?sandbox_token=#{TOKEN} to see the content.\n\n"
+puts "Visit #{SANDBOX_URL}/?sandbox_token=#{SANDBOX_TOKEN} to see the content.\n\n"
 
 def monitor
   FSSM.monitor(DOCS, '**/*', :directories => true) do
@@ -30,7 +33,7 @@ def monitor
 end
 
 def republish
-  content_hash = RubymonkModel.new(DOCS).build_hash.merge({ "sandbox_token" => TOKEN })
+  content_hash = RubymonkModel.new(DOCS).build_hash.merge({ "sandbox_token" => SANDBOX_TOKEN})
   begin
     response = CLIENT.sync_data(content_hash)
     puts Time.now
@@ -43,7 +46,7 @@ def republish
       puts "Changes not uploaded. Server returned an error."
     end
   rescue Errno::ECONNREFUSED
-    puts "Could not connect to network."
+    puts "Could not connect to server."
   end
 end
 

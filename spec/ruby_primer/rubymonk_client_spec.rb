@@ -7,9 +7,9 @@ describe RubymonkClient do
       @fixtures_root = File.join(File.dirname(__FILE__), '..', 'fixtures', "docs")
       @model = RubymonkModel.new(@fixtures_root)
       @chapters = @model.build_hash
-      @token = UUID.new.generate
-      @sandbox_url = "http://localhost:3000/sandbox/import/create"
-      @client = RubymonkClient.new(@sandbox_url, @token)
+      @sandbox_token = UUID.new.generate
+      @sandbox_url = "http://rubymonk-open-0.heroku.com/sandbox/import/create"
+      @client = RubymonkClient.new(@sandbox_url, @sandbox_token)
     end
 
     it "makes a POST request" do
