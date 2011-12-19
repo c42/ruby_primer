@@ -1,13 +1,11 @@
 title - Boolean Expressions in Ruby
 
-.section :introduction_to_ruby_expressions, "Beginner's Guide to Expressions in Ruby", 163
+.section :introduction_to_ruby_expressions, "Beginner's Guide to Expressions in Ruby", 171
   %p
-    Ruby uses the <code>==</code> operator for comparing two objects. It is particularly useful to compare strings, but the comparison is case sensitive. That means:
-
-
+    Ruby uses the <code>==</code> operator for comparing two objects.
   %p
-    Now write an expression to see if the value of the variable <code>name</code> is <code>"Bob"</code>:
-    !enchant
+    Let us try a simple exercise: write an expression that checks whether the value of the variable <code>name</code> is <code>"Bob"</code>:
+    !enchant 3532
       exercise!
       short_name :expression_exercise_simple_equals_to
 
@@ -30,10 +28,10 @@ title - Boolean Expressions in Ruby
     !release
 
   %p
-    The other usual operators like greater than, less than, greater than or equal to etc. are supported.
+    The other usual operators like greater than (>), less than (<), greater than or equal to (>=) etc. are supported.
     The next exercise is to write an expression that validates whether <code>age</code> is less than or equal to </code>35</code>.
 
-    !enchant
+    !enchant 3533
       exercise!
       short_name :expression_exercise_simple_less_equals_to
 
@@ -62,14 +60,17 @@ title - Boolean Expressions in Ruby
     Boolean expressions like the above always return either the <code>true</code> or <code>false</code>
     objects.
 
-  %h3 Combining Expressions using the <code>and</code> and <code>or</code> operators
+  %h3 Combining Expressions using the <code>&&</code> and <code>||</code> operators
 
   %p
-    You can use the keywords <code>or</code>, <code>and</code> to combine expressions. Try modifying the following expression to check whether <code>age</code> is greater than or equal to <code>23</code> and the name is either <code>Bob</code> or <code>Jill</code>.
-    !enchant
+    You can use the keywords <code>||</code> (read as 'or'), <code>&&</code> (read as 'and') to combine expressions. 
+    Try modifying the following expression to check whether <code>age</code> is greater than or equal 
+    to <code>23</code> and the name is either <code>Bob</code> or <code>Jill</code>.
+    
+    !enchant 3534
       exercise!
       short_name :expression_exercise_combining_expressions
-      starting_code "age >= 23 and name == 'Bob'"
+      starting_code "age >= 23 && name == 'Bob'"
 
       code_wrapper <<-DATA
         def user_code(age, name)
@@ -78,7 +79,7 @@ title - Boolean Expressions in Ruby
       DATA
 
       solution <<-DATA
-age >= 23 and (name == 'Bob' or name == 'Jill')
+age >= 23 && (name == 'Bob' || name == 'Jill')
       DATA
 
       specs <<-DATA
@@ -104,14 +105,13 @@ age >= 23 and (name == 'Bob' or name == 'Jill')
 
   %h3 Negating expressions
   %p
-    Ruby lets you negate expressions using the <code>not</code> operator. For instance, <code>not name == 'Jill'</code> will return false if the name is <code>Jill</code> and <code>true</code> for any other name.
-  %p
-    It is a good practice to use the <code>not</code> operator around the enclosed
-    condition when you need to negate a large expression.
+    Ruby lets you negate expressions using the <code>!</code> operator (read as 'not'). 
+    For instance, <code>! (name == 'Jill')</code> will return false if the name is <code>Jill</code> and
+    <code>true</code> for any other name.
   %p
     Now try writing a simple expression that accepts any name except <code>Bob</code>
   %p
-    !enchant
+    !enchant 3535
       exercise!
       short_name :expression_exercise_not
 
@@ -122,7 +122,7 @@ age >= 23 and (name == 'Bob' or name == 'Jill')
       DATA
 
       solution <<-DATA
-        not (name == 'Bob')
+        ! (name == 'Bob')
       DATA
 
       specs <<-DATA
@@ -138,3 +138,4 @@ age >= 23 and (name == 'Bob' or name == 'Jill')
     Awesome! Now that you've learned the basics of writing boolean expressions in Ruby, let
     us see how we can use them to decide the flow of our application in the
     next lesson.
+
