@@ -102,3 +102,38 @@ restaurant_menu.keys
       pp user_code
     DATA
   !release
+
+.section :selecting_values_from_a_hash, "Selecting values from a Hash", 170
+  %p
+    You can select key-value pairs from the hash, which satisfy a condition - using the <code>select</code> method.
+    It will return a new hash with just the items which satisfied the condition.
+
+  %p
+    Try getting items which cost less than 10 from the <code>restaurant_menu</code> hash:
+
+  !enchant
+    exercise!
+    short_name :selecting_values_from_a_hash_examples
+    starting_code <<-DATA
+restaurant_menu = { "Burger" => 5, "Pizza" => 12, "Coffee" => 1 }
+# your code here
+    DATA
+
+    specs <<-DATA
+      it "picks items which cost less than 10" do
+        user_code.should == {"Burger" => 5, "Coffee" => 1}
+      end
+    DATA
+
+    solution <<-DATA
+restaurant_menu = { "Burger" => 5, "Pizza" => 12, "Coffee" => 1 }
+restaurant_menu.select { |item, price| price < 10 }
+    DATA
+
+    code_wrapper <<-DATA
+      def user_code
+        <%= user_code %>
+      end
+        pp user_code
+    DATA
+  !release
