@@ -4,7 +4,8 @@
 
 ## Teach Ruby!
 
-<h4>Fork this repository, make changes and use the RubyMonk Sandbox for a live preview. Send us a pull request when you are done!</h4>
+<strong>Fork this repository, make changes and use the RubyMonk Sandbox for a live preview. Send us a pull request when you are done!</strong>
+
 The Ruby Primer is an open collaboration initiative that uses the [RubyMonk][] platform to help teach the Ruby Programming Language.
 
 ## How to Contribute
@@ -78,6 +79,9 @@ The `!enchant` starts a block of exercise. Use `!release` once you are done. Eve
  written by the user. RubyMonk uses ERB templating to render it, the user's code is passed in as the variable `user_code`.
 - `specs` : RSpec block that tests the method in the `code_wrapper`.
 
+To display any specific text in the RubyMonk output window when running a particular exercise, 
+add `puts` or a similar command that writes to `stdout` in either the `specs` or the `code_wrapper` block. 
+
 An exercise needs to have:
 
 - `starting_code`
@@ -95,6 +99,8 @@ Go ahead and check out the existing lessons to get a hold of the DSL better.
 ## Scope
 
 The Ruby Primer is targeted at programmers who are learning Ruby for the first time. However people who are completely new to programming have also found it useful. The scope of The Ruby Primer is to cover just enough basics to help one get started with Ruby.
+
+For trivial changes to the content, you can use the GitHub `Edit` option instead of manually forking and sending a pull request.
 
 ## Prerequisites
 
