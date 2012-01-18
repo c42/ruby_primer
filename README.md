@@ -4,7 +4,7 @@
 
 ## Teach Ruby!
 
-For simple spelling and grammar changes, <strong>simply fork, edit, commit and send us a pull request!</strong>
+For spelling and grammar changes, <strong>simply fork, edit, commit and send us a pull request!</strong>
 
 If you want to add content and need your own private RubyMonk sandbox to test your changes, read on.
 
