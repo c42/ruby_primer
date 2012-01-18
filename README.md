@@ -4,7 +4,9 @@
 
 ## Teach Ruby!
 
-<strong>Fork this repository, make changes and use the RubyMonk Sandbox for a live preview. Send us a pull request when you are done!</strong>
+For simple spelling and grammar changes, <strong>simply fork, edit, commit and send us a pull request.</strong>
+
+Fork this repository, make changes and use the RubyMonk Sandbox for a live preview. Send us a pull request when you are done!
 
 The Ruby Primer is an open collaboration initiative that uses the [RubyMonk][] platform to help teach the Ruby Programming Language.
 
