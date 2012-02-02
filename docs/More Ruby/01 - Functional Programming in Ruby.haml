@@ -1,6 +1,6 @@
 title - Functional Programming in Ruby - Lambdas and Blocks
 
-.section :lambdas, "Lambdas", 161
+.section :lambdas, "Lambdas", 622
   %p
     You may have heard of lambdas before. Perhaps you've used them in 
     other languages. Despite the fancy name, a lambda is just a function... 
@@ -14,7 +14,7 @@ title - Functional Programming in Ruby - Lambdas and Blocks
     As objects, lambdas have methods and can be assigned to variables. Let's
     try it!
     
-    !enchant 3180
+    !enchant 2807
       short_name :call_basic_lambda
       example!
       starting_code <<-DATA
@@ -39,7 +39,7 @@ title - Functional Programming in Ruby - Lambdas and Blocks
     (We first learned about blocks when we looked at collections. We'll come back 
     to them in a minute.)
 
-    !enchant 3181
+    !enchant 2808
       short_name :call_parameterized_lambda
       example!
       starting_code <<-DATA
@@ -63,7 +63,7 @@ title - Functional Programming in Ruby - Lambdas and Blocks
     Even cooler. Now go ahead and add a lambda to the following code, which will combine two names passed as
     arguments, and return the combined name:
     
-    !enchant 3182
+    !enchant 2809
       short_name :combiner_lambda
       exercise!
       starting_code <<-DATA
@@ -109,7 +109,7 @@ with_names(l)
       DATA
     !release
 
-.section :lambdas_vs_blocks, "Lambdas vs. Blocks", 162
+.section :lambdas_vs_blocks, "Lambdas vs. Blocks", 623
 
   %p
     Something about that last example felt weird, didn't it? Perhaps not exclusively its 
@@ -151,7 +151,7 @@ with_names(l)
       invisible friend <code>self</code> -- <code>yield</code> is the same, though 
       it will throw an exception if there was no block given.
 
-    !enchant 3187
+    !enchant 2814
       short_name :transmogrify
       exercise!
       starting_code <<-DATA
@@ -212,7 +212,7 @@ with_names(l)
     <code>{ |a| ... }</code>. By convention, it's common to see the curly 
     braces in one-liners and the do-end syntax for multi-line blocks.
     
-  !enchant 3188
+  !enchant 2815
       short_name :map
       exercise!
       starting_code <<-DATA
@@ -270,7 +270,7 @@ with_names(l)
     could use <code>inject</code>! Take a look at the example and then see if you can 
     apply it yourself.
     
-    !enchant 3189
+    !enchant 2816
       short_name :inject_example
       example!
       starting_code <<-DATA
@@ -290,7 +290,7 @@ with_names(l)
     !release
     
 
-  !enchant 3190
+  !enchant 2817
       short_name :inject_names
       exercise!
       starting_code <<-DATA
