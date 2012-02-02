@@ -1,6 +1,6 @@
 title - Advanced String Operations
 
-.section :split, "Splitting Strings", 635
+.section :split, "Splitting Strings", 119
   %p
     In this lesson, we will have a look at some vital methods that the <code>String</code> object provides for string manipulation.
   %p
@@ -9,7 +9,7 @@ title - Advanced String Operations
     to get a collection of words in the string. 
 
 
-   !enchant 2879
+   !enchant 664
       short_name :string_split_simple
       exercise!
       starting_code <<-DATA
@@ -42,12 +42,12 @@ title - Advanced String Operations
     It is possible to similarly split strings on new lines, and parse large amounts of data that is in the form of CSV.
     
 
-.section :concat, "Concatenating Strings", 636
+.section :concat, "Concatenating Strings", 120
   %p
     You can create a new string by adding two strings together in Ruby, just like most other languages.
 
 
-   !enchant 2882
+   !enchant 669
       short_name :string_addition
       example!
       starting_code <<-DATA
@@ -70,7 +70,7 @@ title - Advanced String Operations
     Ruby often provides more than one way to do the same thing. The literal and expressive method for String concatenation is String#concat. 
 
 
-   !enchant 2883
+   !enchant 670
       short_name :string_concatination
       example!
       starting_code <<-DATA
@@ -98,13 +98,13 @@ title - Advanced String Operations
     Change the code above to use '<<' and see all the tests passing again.
 
 
-.section :replace, "Replacing a substring", 637
+.section :replace, "Replacing a substring", 124
   %p
     The Ruby String API provides strong support for searching and replacing within strings. We can search for sub-strings or use Regex. 
     Let us first try our hands at something simple. This is how we would replace 'I' with 'We' in a given string:
 
 
-   !enchant 2887
+   !enchant 803
       short_name :string_sub_simple
       example!
       starting_code <<-DATA
@@ -127,7 +127,7 @@ title - Advanced String Operations
     The method above only replaced the first occurrence of the term we were searching for. In order to replace all occurrences, we can use a method called <code>gsub</code>.
 
 
-   !enchant 2888
+   !enchant 804
       short_name :string_gsub_simple
       example!
       starting_code <<-DATA
@@ -153,7 +153,7 @@ title - Advanced String Operations
     
     Now let's look at an example that replaces all the vowels with the number 1:
 
-   !enchant 2889
+   !enchant 805
       short_name :string_sub_vowel
       example!
       starting_code <<-DATA
@@ -175,7 +175,7 @@ title - Advanced String Operations
   %p
     Could you replace all the characters in capital case with number '0' in the following problem?
 
-   !enchant 2890
+   !enchant 806
       short_name :string_sub_capital
       exercise!
       starting_code <<-DATA
@@ -202,13 +202,13 @@ title - Advanced String Operations
    !release
 
 
-.section :match, "Find a substring using RegEx", 638
+.section :match, "Find a substring using RegEx", 125
   %p
     We had earlier covered the art of finding the position of a substring in a previous lesson, but how do we handle those cases where we don't know exactly what we are looking for?
     That's where Regular Expressions come handy. The String#match method converts a pattern to a Regexp (if it isn‘t already one), and then invokes its match method on the target String object.
     Here is how you find the characters from a String which are next to a whitespace:
 
-   !enchant 2896
+   !enchant 838
       short_name :string_match_whitespace
       example!
       starting_code <<-DATA
@@ -230,7 +230,7 @@ title - Advanced String Operations
     As you can see in the output, the method just returns the first match rather than all the matches. In order to find further matches, we can pass a second argument to the match method. 
     When the second parameter is present, it specifies the position in the string to begin the search. Let's find out the second character preceded by space:
 
-   !enchant 2897
+   !enchant 839
       short_name :string_match_2
       exercise!
       starting_code <<-DATA
