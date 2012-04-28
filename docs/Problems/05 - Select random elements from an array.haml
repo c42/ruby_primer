@@ -2,24 +2,24 @@ title - Select random elements from an array
 
 .section :select_random_elements_from_array, "Select random elements from an Array", 128
   %p
-    Create a method 'random_select' which given an array of elements (array) and a number (n), 
-    returns n randomly selected elements from the array.
+    Create a method 'random_select' which, when given an array of elements (array) and a number (n), 
+    returns n randomly selected elements from the given array.
     
   %p
-    <strong>Example:</strong>
-    Given an array [1,2,3,4,5] and 2 should return random two numbers randomly selected from this array. 
-    The method should return the selected values in a new array.
+    <strong>Example:</strong><br/>
+    Given an array [1,2,3,4,5] and 2 should return two random numbers from the given array. 
+    The method should return those random values in a new array.
   %p
-	  Calling the method twice should ideally return different sets of values.
+    Calling the method twice should ideally return different sets of values.
 	
 
    !enchant 1188
       short_name :select_random_elements
       exercise!
       starting_code <<-DATA
-             def random_select(array, n)
-               # your code here
-         	  end
+        def random_select(array, n)
+          # your code here
+        end
              
       DATA
 
