@@ -1,10 +1,10 @@
-title - Find length of strings in an array
+title - Find the length of strings in an array
 
-.section :find_string_length, "Find length of strings in a given array", 112
+.section :find_string_length, "Find the length of strings in a given array", 112
   %p
-    Given an array containing some strings, return another array with their lengths, in the same order as they are. 
+    Given an array containing some strings, return another array with the corresponding lengths respectively.
   %p  
-    You are supposed to write a method named 'length_finder', which accepts an array and returns another array as described before.
+    You are supposed to write a method named 'length_finder' to accomplish this task.
   %p
     <strong>Example:</strong><br/>
     Given ['Ruby','Rails','C42'] the method should return [4,5,3]
@@ -38,9 +38,9 @@ title - Find length of strings in an array
       DATA
       
       solution <<-DATA
-def length_finder(input_array)
-  input_array.map {|element| element.length}
-end
+        def length_finder(input_array)
+          input_array.map {|element| element.length}
+        end
       DATA
 
    !release
